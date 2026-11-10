@@ -192,6 +192,34 @@ h1.bi i.n{color:var(--encre)}
 .puce[aria-pressed="true"]{background:var(--orange);border-color:var(--orange)}
 .touche{border-radius:14px;border-left:6px solid var(--orange)}
 @media (max-width:700px){body.interieur .tete{grid-template-columns:1fr}.chapitre{padding:22px 18px;border-radius:20px}header{border-radius:0 0 28px 28px}}
+
+/* allègement : une seule signature forte par écran */
+.compte,.sur{font-size:.78rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--encre-doux);margin:0 0 14px;display:block}
+.sur em{font-style:normal;background:var(--rose);color:#fff;border-radius:999px;padding:1px 9px;margin-left:6px;letter-spacing:.03em}
+.grille{grid-template-columns:repeat(auto-fill,minmax(300px,380px));gap:20px}
+.fiche{flex-direction:column;gap:10px;padding:26px 24px 30px;min-height:190px}
+.fiche .sur{color:rgba(255,255,255,.7);margin:0}
+.fiche b{font-size:1.35rem;line-height:1.25;padding-right:0}
+.fiche p{padding-right:48px;font-size:.95rem}
+.entete{margin:6px 0 26px;max-width:760px}
+.entete .sur{margin-bottom:8px}
+.etapes{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;max-width:980px}
+.etape{display:flex;align-items:center;gap:14px;text-align:left;background:var(--carte);border:0;border-radius:14px;padding:12px 16px 12px 12px;cursor:pointer;box-shadow:0 1px 3px rgba(23,47,87,.07);transition:transform .12s,box-shadow .12s}
+.etape:hover,.etape:focus-visible{transform:translateX(4px);box-shadow:0 6px 16px rgba(23,47,87,.13)}
+.etape .ico{width:44px;height:44px;border-radius:12px;font-size:1.3rem;background:var(--fond)}
+.etape .lbl{font-weight:700;font-size:1.02rem;padding:0;flex:1}
+.etape .fl{color:var(--orange);font-weight:900;opacity:0;transition:opacity .12s}
+.etape:hover .fl,.etape:focus-visible .fl{opacity:1}
+.pied-doc{text-align:left;margin-top:22px}
+.tuile.mini{background:var(--carte);color:var(--encre);border-bottom:0;box-shadow:0 1px 3px rgba(23,47,87,.07)}
+.tuile.mini .ico{background:var(--fond);color:var(--orange)}
+.tuile.mini .desc{color:var(--encre-doux)}
+.chapitre{padding:30px 34px}
+.chapitre>h2{font-size:clamp(1.3rem,3vw,1.7rem);margin-bottom:18px}
+.chapitre>h2 .ico{background:var(--fond)}
+.essentiel{font-size:1.03rem}
+footer{padding-top:8px;opacity:.8}
+@media (prefers-reduced-motion:reduce){.etape{transition:none}}
 </style>
 </head>
 <body>
@@ -247,21 +275,21 @@ function accueil(){
     h+=touches.length?`<div class="resultats">${touches.map(t=>`<button type="button" class="touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><small>${esc(t.d.logiciel)} · ${esc(t.d.titre)}</small><b>${t.i+1}. ${esc(t.c.titre)}</b><p>${extrait(t.c,mots)}</p></button>`).join("")}</div>`
       :`<div class="vide">Aucun passage ne contient ces mots. Essayez un seul mot, ou un terme affiché à l'écran dans le logiciel.</div>`;
   }else{
-    h+=`<div class="intro apparait"><h1 class="bi">Des modes d'emploi oui<i>.</i><br><em>Mais en étapes courtes</em><i class="n">.</i></h1><p class="doux">${docs.length} document${docs.length>1?"s":""} pour l'instant. Cherchez un mot ou choisissez une carte.</p></div>`;
-    h+=docs.length?`<div class="grille apparait">${docs.map(d=>`<button type="button" class="fiche" data-doc="${esc(d.slug)}"><span class="ico">${d.icone||"📘"}</span><span class="corps"><div class="etiquettes"><span class="logiciel">${esc(d.logiciel)}</span><span>${esc(d.thematique)}</span>${recent(d.date)?`<span class="neuf">${d.version>1?"Mis à jour":"Nouveau"}</span>`:""}</div><b>${esc(d.titre)}<i class="pt">.</i></b><p>${esc(d.resume||"")}</p><div class="meta">${d.chapitres.length} chapitres · ${esc(d.publics.join(", "))} · ${jour(d.date)}</div></span><span class="go" aria-hidden="true">»</span></button>`).join("")}</div>`
+    h+=`<p class="compte">${docs.length} mode${docs.length>1?"s":""} d'emploi</p>`;
+    h+=docs.length?`<div class="grille apparait">${docs.map(d=>`<button type="button" class="fiche" data-doc="${esc(d.slug)}"><span class="sur">${esc(d.logiciel)} · ${esc(d.thematique)}${recent(d.date)?` <em>${d.version>1?"Mis à jour":"Nouveau"}</em>`:""}</span><b>${esc(d.titre)}<i class="pt">.</i></b><p>${esc(d.resume||"")}</p><span class="go" aria-hidden="true">»</span></button>`).join("")}</div>`
       :`<div class="vide">${DOCS.length?"Aucun document ne correspond à ces filtres.":"Aucun mode d'emploi n'est encore publié."}</div>`;
   }
   $("#vue").innerHTML=h;
 }
 function chapitreHtml(d,c,i){
-  return `<section class="chapitre apparait"><h2><span class="ico">${c.icone||i+1}</span><span>${esc(c.titre)}<i class="pt">.</i></span></h2><div class="essentiel">${c.essentiel}</div>${c.pages.length?`<div class="origine"><span>Captures et détail, pages d'origine</span><div class="pages">${c.pages.map(p=>`<div><button type="button" class="page" data-img="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" aria-label="Agrandir la page ${p.n}"><img loading="lazy" width="${p.l}" height="${p.h}" src="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" alt="Page ${p.n} du document d'origine"></button><p class="legende">Page ${p.n} sur ${d.nbPages}. Cliquez pour agrandir.</p></div>`).join("")}</div></div>`:""}</section>`;
+  return `<section class="chapitre apparait"><h2><span class="ico">${c.icone||i+1}</span><span>${esc(c.titre)}</span></h2><div class="essentiel">${c.essentiel}</div>${c.pages.length?`<div class="origine"><span>Captures et détail, pages d'origine</span><div class="pages">${c.pages.map(p=>`<div><button type="button" class="page" data-img="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" aria-label="Agrandir la page ${p.n}"><img loading="lazy" width="${p.l}" height="${p.h}" src="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" alt="Page ${p.n} du document d'origine"></button><p class="legende">Page ${p.n} sur ${d.nbPages}. Cliquez pour agrandir.</p></div>`).join("")}</div></div>`:""}</section>`;
 }
 function document_(d){
   const n=d.chapitres.length,i=d.chapitres.findIndex(c=>c.id===E.chapitre);
   let h;
   if(i<0){
-    h=`<button type="button" class="retour" data-doc="">← Tous les modes d'emploi</button><div class="intro apparait"><div class="etiquettes"><span class="logiciel">${esc(d.logiciel)}</span><span>${esc(d.thematique)}</span><span>${esc(d.publics.join(", "))}</span></div><h1 class="bi">${esc(d.titre)}<i>.</i></h1><p class="doux">Que voulez-vous faire ? Choisissez une étape.</p></div>
-    <div class="tuiles apparait">${d.chapitres.map((c,k)=>`<button type="button" class="tuile" data-ouvrir="${esc(c.id)}"><span class="ico">${c.icone||k+1}</span><span><span class="lbl">${esc(c.titre)}<i class="pt">.</i></span><span class="desc">Étape ${k+1} sur ${n}</span></span><span class="go" aria-hidden="true">»</span></button>`).join("")}</div>
+    h=`<button type="button" class="retour" data-doc="">← Tous les modes d'emploi</button><div class="entete apparait"><span class="sur">${esc(d.logiciel)} · ${esc(d.thematique)}</span><h1 class="bi">${esc(d.titre)}<i>.</i></h1></div>
+    <div class="etapes apparait">${d.chapitres.map((c,k)=>`<button type="button" class="etape" data-ouvrir="${esc(c.id)}"><span class="ico">${c.icone||k+1}</span><span class="lbl">${esc(c.titre)}</span><span class="fl" aria-hidden="true">→</span></button>`).join("")}</div>
     <p class="doux pied-doc">Version ${d.version} du ${jour(d.date)}${d.note?" · "+esc(d.note):""}${d.pdf?` · <a href="docs/${esc(d.slug)}/original.pdf" style="color:var(--lien)">Télécharger le PDF d'origine</a>`:""}</p>`;
   }else{
     const c=d.chapitres[i],av=d.chapitres[i-1],ap=d.chapitres[i+1];
