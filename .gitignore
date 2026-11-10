@@ -1,2 +1,3 @@
 contenu/*/source.pdf
 __pycache__/
+contenu/*/.mots.json
