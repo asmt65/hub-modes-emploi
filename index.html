@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Modes d'emploi ASMT 65</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* Layout : bandeau marine avec la recherche, puis soit la bibliothèque (filtres + cartes), soit un document (sommaire fixe à gauche, chapitres à droite). */
+:root{
+  --fond:#f3f6fa; --carte:#ffffff; --encre:#172F57; --encre-doux:#55657f; --trait:#d9e1ec; --creux:#eaf0f7;
+  --bleu:#2091D0; --vert:#60BB46; --orange:#F37537; --rose:#EF599A;
+  --bandeau:#172F57; --sur-bandeau:#ffffff; --lien:#1878b0;
+  --corps:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --fond:#0d1727; --carte:#152238; --encre:#e8eef7; --encre-doux:#9fb0c8; --trait:#2a3b57; --creux:#1c2c47;
+    --bandeau:#0a1322; --sur-bandeau:#e8eef7; --lien:#62b8ea; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --fond:#0d1727; --carte:#152238; --encre:#e8eef7; --encre-doux:#9fb0c8; --trait:#2a3b57; --creux:#1c2c47;
+  --bandeau:#0a1322; --sur-bandeau:#e8eef7; --lien:#62b8ea; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0}
+body{background:var(--fond);color:var(--encre);font-family:var(--corps);font-size:16.5px;line-height:1.55}
+img{max-width:100%;height:auto;display:block}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+header{background:var(--bandeau);color:var(--sur-bandeau);position:relative}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--bleu) 0 25%,var(--vert) 25% 50%,var(--orange) 50% 75%,var(--rose) 75% 100%)}
+.tete{max-width:1180px;margin:0 auto;padding:20px 16px 24px;display:flex;gap:16px 28px;align-items:center;flex-wrap:wrap}
+.marque{background:none;border:0;padding:0;cursor:pointer;text-align:left;color:inherit}
+.marque b{display:block;font-size:1.45rem;font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.marque span{opacity:.75;font-size:.9rem}
+.cherche{flex:1 1 300px;position:relative}
+.cherche input{width:100%;font:inherit;font-size:1.05rem;padding:12px 14px 12px 44px;border-radius:12px;border:2px solid transparent;background:#fff;color:#172F57}
+.cherche svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:#55657f}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 56px}
+h1{font-size:1.7rem;font-weight:900;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+h2{font-size:1.3rem;font-weight:900;margin:0 0 12px;text-wrap:balance}
+.doux{color:var(--encre-doux)}
+/* filtres */
+.filtres{display:flex;flex-direction:column;gap:10px;margin:0 0 22px}
+.rangee{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.rangee>span{font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--encre-doux);min-width:92px}
+.puce{font-weight:700;border:2px solid var(--trait);background:var(--carte);border-radius:999px;padding:5px 14px;cursor:pointer}
+.puce:hover{border-color:var(--c)}
+.puce[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+/* cartes */
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.fiche{background:var(--carte);border:1px solid var(--trait);border-left:6px solid var(--bleu);border-radius:12px;padding:16px 18px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:transform .12s,box-shadow .12s}
+.fiche:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(23,47,87,.12)}
+.fiche b{font-size:1.1rem;line-height:1.3}
+.fiche p{margin:0;color:var(--encre-doux);font-size:.95rem}
+.etiquettes{display:flex;gap:6px;flex-wrap:wrap;font-size:.76rem;font-weight:900}
+.etiquettes span{border-radius:999px;padding:2px 10px;background:var(--creux)}
+.etiquettes .logiciel{background:var(--vert);color:#fff}
+.etiquettes .neuf{background:var(--rose);color:#fff}
+.meta{font-size:.82rem;color:var(--encre-doux);margin-top:auto}
+/* résultats */
+.resultats{display:flex;flex-direction:column;gap:10px}
+.touche{background:var(--carte);border:1px solid var(--trait);border-radius:12px;padding:12px 16px;text-align:left;cursor:pointer}
+.touche:hover{border-color:var(--bleu)}
+.touche small{color:var(--encre-doux);display:block}
+.touche b{display:block}
+.touche p{margin:4px 0 0;font-size:.93rem;color:var(--encre-doux)}
+mark{background:color-mix(in srgb,var(--orange) 35%,transparent);color:inherit;border-radius:3px;padding:0 2px}
+.vide{background:var(--carte);border:1px dashed var(--trait);border-radius:12px;padding:26px;text-align:center;color:var(--encre-doux)}
+/* document */
+.retour{background:none;border:0;padding:0;color:var(--lien);font-weight:700;cursor:pointer;margin-bottom:14px}
+.doc{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;align-items:start}
+.sommaire{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:var(--carte);border:1px solid var(--trait);border-radius:12px;padding:14px}
+.sommaire strong{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--encre-doux);margin-bottom:8px}
+.sommaire ol{margin:0;padding:0;list-style:none;counter-reset:ch;display:flex;flex-direction:column;gap:2px}
+.sommaire button{counter-increment:ch;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:7px 9px;cursor:pointer;display:flex;gap:8px;line-height:1.3;font-size:.95rem}
+.sommaire button::before{content:counter(ch);font-weight:900;color:var(--bleu);min-width:1.2em;font-variant-numeric:tabular-nums}
+.sommaire button:hover,.sommaire button.ici{background:var(--creux)}
+.sommaire button.ici{font-weight:700}
+.chapitre{background:var(--carte);border:1px solid var(--trait);border-radius:14px;padding:22px;margin-bottom:20px;scroll-margin-top:14px}
+.chapitre>h2{display:flex;gap:12px;align-items:baseline}
+.chapitre>h2 i{font-style:normal;color:#fff;background:var(--bleu);border-radius:8px;min-width:1.7em;text-align:center;font-size:1rem;padding:2px 6px}
+.essentiel{max-width:72ch}
+.essentiel h4{margin:18px 0 6px;font-size:1.02rem;font-weight:900}
+.essentiel p{margin:0 0 10px}
+.essentiel ul,.essentiel ol{margin:0 0 12px;padding-left:1.3em;display:flex;flex-direction:column;gap:5px}
+.essentiel ol li::marker{font-weight:900;color:var(--bleu)}
+.essentiel .alerte,.essentiel .note{border-left:4px solid var(--orange);background:var(--creux);padding:9px 14px;border-radius:0 10px 10px 0}
+.essentiel .note{border-left-color:var(--bleu)}
+.origine{margin-top:18px;border-top:1px solid var(--trait);padding-top:14px}
+.origine>span{display:block;font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--encre-doux);margin-bottom:10px}
+.pages{display:flex;flex-direction:column;gap:14px}
+.page{border:1px solid var(--trait);border-radius:10px;overflow:hidden;background:#fff;padding:0;cursor:zoom-in;display:block;width:100%}
+.page img{width:100%}
+.legende{font-size:.8rem;color:var(--encre-doux);margin:4px 2px 0}
+/* visionneuse */
+#loupe{position:fixed;inset:0;background:rgba(8,14,26,.92);display:none;z-index:10;overflow:auto;padding:52px 12px 20px;cursor:zoom-out}
+#loupe.ouvert{display:block}
+#loupe img{margin:0 auto;background:#fff;max-width:none;width:min(1400px,100%)}
+#loupe.grand img{width:1400px}
+#loupe button{position:fixed;top:10px;right:14px;background:#fff;color:#172F57;border:0;border-radius:8px;padding:8px 14px;font-weight:900;cursor:pointer}
+footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--encre-doux);font-size:.85rem}
+@media (max-width:860px){
+  .doc{grid-template-columns:1fr;gap:16px}
+  .sommaire{position:static;max-height:none}
+  .rangee>span{min-width:100%}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fiche{transition:none}}
+
+/* tuiles et fiches, dans l'esprit du manuel employeur */
+header{position:sticky;top:0;z-index:5;box-shadow:0 2px 12px rgba(23,47,87,.25)}
+.apparait{animation:apparait .25s ease}
+@keyframes apparait{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.intro{text-align:center;margin:6px 0 26px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.intro p{margin:0;max-width:60ch}
+.ico{width:52px;height:52px;border-radius:14px;background:var(--creux);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex:none;font-weight:900;color:var(--bleu)}
+.tuiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.tuile{background:var(--carte);border:2px solid transparent;border-radius:16px;padding:20px 18px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:16px;box-shadow:0 1px 4px rgba(23,47,87,.1);transition:transform .15s,box-shadow .15s,border-color .15s}
+.tuile:hover,.tuile:focus-visible{transform:translateY(-3px);box-shadow:0 8px 20px rgba(23,47,87,.16);border-color:var(--c,var(--bleu))}
+.tuile:hover .ico{transform:rotate(-6deg) scale(1.08)}
+.tuile .ico{transition:transform .15s;background:color-mix(in srgb,var(--c,var(--bleu)) 16%,var(--carte))}
+.tuiles .tuile:nth-child(4n+1){--c:var(--bleu)}.tuiles .tuile:nth-child(4n+2){--c:var(--vert)}.tuiles .tuile:nth-child(4n+3){--c:var(--orange)}.tuiles .tuile:nth-child(4n){--c:var(--rose)}
+.lbl{display:block;font-weight:900;line-height:1.3}
+.desc{display:block;font-size:.8rem;color:var(--encre-doux);margin-top:2px}
+.pied-doc{text-align:center;margin:24px 0 0;font-size:.88rem}
+.fiche{flex-direction:row;align-items:flex-start;gap:16px;border-left-width:1px;border:2px solid transparent;border-radius:16px;box-shadow:0 1px 4px rgba(23,47,87,.1)}
+.fiche:hover{border-color:var(--vert)}
+.fiche .ico{background:color-mix(in srgb,var(--vert) 18%,var(--carte))}
+.fiche .corps{display:flex;flex-direction:column;gap:8px;min-width:0}
+.grille{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.barre{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.barre .retour{margin:0}
+.chapitre{max-width:900px;margin-left:auto;margin-right:auto;padding:28px 30px;border-radius:16px}
+.barre,.suite{max-width:900px;margin-left:auto;margin-right:auto}
+.chapitre>h2{align-items:center;font-size:1.45rem;gap:14px}
+.suite{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tuile.mini{padding:12px 14px}
+.tuile.mini .ico{width:40px;height:40px;font-size:1.1rem}
+.tuile.droite{justify-content:flex-end;text-align:right}
+@media (max-width:600px){.suite{grid-template-columns:1fr}.chapitre{padding:20px 16px}.grille{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.apparait{animation:none}.tuile,.tuile .ico{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="tete">
+    <button class="marque" id="accueil" type="button"><b>Modes d'emploi</b><span>Les logiciels de l'ASMT 65, expliqués pas à pas</span></button>
+    <label class="cherche" for="q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <input id="q" type="search" placeholder="Chercher : planning, demande d'intervention, statut…" autocomplete="off"></label>
+  </div>
+</header>
+<main id="vue"></main>
+<footer>Votre service de prévention et de santé au travail – ASMT 65. Document interne, destiné aux collaborateurs.</footer>
+<div id="loupe" role="dialog" aria-label="Page agrandie"><button type="button">Fermer</button><img alt=""></div>
+<script src="data.js"></script>
+<script>
+const DOCS=(window.HUB&&HUB.docs)||[];
+const E={q:"",logiciel:"",thematique:"",public:"",chapitre:""};
+const $=s=>document.querySelector(s);
+const esc=t=>String(t??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const plat=t=>String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[’']/g," ");
+const jour=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}catch(e){return d}};
+const recent=d=>(Date.now()-new Date(d+"T12:00:00").getTime())<30*864e5;
+const uniques=f=>[...new Set(DOCS.flatMap(f))].sort((a,b)=>a.localeCompare(b,"fr"));
+DOCS.forEach(d=>d.chapitres.forEach(c=>{c._p=plat(c.recherche)}));
+
+function slugCourant(){const h=location.hash.slice(1);return h.startsWith("doc-")?h.slice(4):""}
+function aller(slug,chapitre){E.chapitre=chapitre||"";const h=slug?"#doc-"+slug:"#accueil";if(location.hash===h)rendre();else location.hash=h}
+
+function rangee(nom,cle,valeurs,couleur){
+  if(valeurs.length<2)return "";
+  return `<div class="rangee"><span>${nom}</span>${valeurs.map(v=>`<button type="button" class="puce" style="--c:var(${couleur})" data-filtre="${cle}" data-val="${esc(v)}" aria-pressed="${E[cle]===v}">${esc(v)}</button>`).join("")}</div>`;
+}
+function extrait(c,mots){
+  const brut=c.recherche,p=c._p;let i=-1;
+  for(const m of mots){i=p.indexOf(m);if(i>=0)break}
+  if(i<0)i=0;
+  const a=Math.max(0,i-70),b=Math.min(brut.length,i+150);
+  let s=(a>0?"… ":"")+brut.slice(a,b)+(b<brut.length?" …":"");
+  mots.forEach(m=>{if(m.length>1)s=s.replace(new RegExp("("+m.replace(/[.*+?^${}()|[\]\\]/g,"\\$&").replace(/e/g,"[eéèêë]").replace(/a/g,"[aàâ]").replace(/u/g,"[uùû]").replace(/i/g,"[iîï]").replace(/o/g,"[oô]").replace(/c/g,"[cç]")+")","gi"),"\u0001$1\u0002")});
+  s=esc(s).replace(/\u0001/g,"<mark>").replace(/\u0002/g,"</mark>");
+  return s;
+}
+function accueil(){
+  const mots=plat(E.q).split(/\s+/).filter(Boolean);
+  const garde=d=>(!E.logiciel||d.logiciel===E.logiciel)&&(!E.thematique||d.thematique===E.thematique)&&(!E.public||d.publics.includes(E.public)||d.publics.includes("Tous"));
+  const docs=DOCS.filter(garde);
+  let h=`<div class="filtres">${rangee("Logiciel","logiciel",uniques(d=>[d.logiciel]),"--vert")}${rangee("Thématique","thematique",uniques(d=>[d.thematique]),"--orange")}${rangee("Je suis","public",uniques(d=>d.publics).filter(p=>p!=="Tous"),"--bleu")}</div>`;
+  if(mots.length){
+    const touches=[];
+    docs.forEach(d=>d.chapitres.forEach((c,i)=>{if(mots.every(m=>c._p.includes(m)))touches.push({d,c,i})}));
+    h+=`<h1>${touches.length} résultat${touches.length>1?"s":""} pour « ${esc(E.q.trim())} »</h1><p class="doux">La recherche porte sur tout le contenu des documents.</p>`;
+    h+=touches.length?`<div class="resultats">${touches.map(t=>`<button type="button" class="touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><small>${esc(t.d.logiciel)} · ${esc(t.d.titre)}</small><b>${t.i+1}. ${esc(t.c.titre)}</b><p>${extrait(t.c,mots)}</p></button>`).join("")}</div>`
+      :`<div class="vide">Aucun passage ne contient ces mots. Essayez un seul mot, ou un terme affiché à l'écran dans le logiciel.</div>`;
+  }else{
+    h+=`<div class="intro apparait"><h1>Quel logiciel vous résiste aujourd'hui ?</h1><p class="doux">${docs.length} mode${docs.length>1?"s":""} d'emploi, découpé${docs.length>1?"s":""} en étapes courtes. Cherchez un mot ou choisissez un document.</p></div>`;
+    h+=docs.length?`<div class="grille apparait">${docs.map(d=>`<button type="button" class="fiche" data-doc="${esc(d.slug)}"><span class="ico">${d.icone||"📘"}</span><span class="corps"><div class="etiquettes"><span class="logiciel">${esc(d.logiciel)}</span><span>${esc(d.thematique)}</span>${recent(d.date)?`<span class="neuf">${d.version>1?"Mis à jour":"Nouveau"}</span>`:""}</div><b>${esc(d.titre)}</b><p>${esc(d.resume||"")}</p><div class="meta">${d.chapitres.length} chapitres · ${esc(d.publics.join(", "))} · ${jour(d.date)}</div></span></button>`).join("")}</div>`
+      :`<div class="vide">${DOCS.length?"Aucun document ne correspond à ces filtres.":"Aucun mode d'emploi n'est encore publié."}</div>`;
+  }
+  $("#vue").innerHTML=h;
+}
+function chapitreHtml(d,c,i){
+  return `<section class="chapitre apparait"><h2><span class="ico">${c.icone||i+1}</span>${esc(c.titre)}</h2><div class="essentiel">${c.essentiel}</div>${c.pages.length?`<div class="origine"><span>Captures et détail, pages d'origine</span><div class="pages">${c.pages.map(p=>`<div><button type="button" class="page" data-img="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" aria-label="Agrandir la page ${p.n}"><img loading="lazy" width="${p.l}" height="${p.h}" src="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" alt="Page ${p.n} du document d'origine"></button><p class="legende">Page ${p.n} sur ${d.nbPages}. Cliquez pour agrandir.</p></div>`).join("")}</div></div>`:""}</section>`;
+}
+function document_(d){
+  const n=d.chapitres.length,i=d.chapitres.findIndex(c=>c.id===E.chapitre);
+  let h;
+  if(i<0){
+    h=`<button type="button" class="retour" data-doc="">← Tous les modes d'emploi</button><div class="intro apparait"><div class="etiquettes"><span class="logiciel">${esc(d.logiciel)}</span><span>${esc(d.thematique)}</span><span>${esc(d.publics.join(", "))}</span></div><h1>${esc(d.titre)}</h1><p class="doux">Que voulez-vous faire ? Choisissez une étape.</p></div>
+    <div class="tuiles apparait">${d.chapitres.map((c,k)=>`<button type="button" class="tuile" data-ouvrir="${esc(c.id)}"><span class="ico">${c.icone||k+1}</span><span><span class="lbl">${esc(c.titre)}</span><span class="desc">Étape ${k+1} sur ${n}</span></span></button>`).join("")}</div>
+    <p class="doux pied-doc">Version ${d.version} du ${jour(d.date)}${d.note?" · "+esc(d.note):""}${d.pdf?` · <a href="docs/${esc(d.slug)}/original.pdf" style="color:var(--lien)">Télécharger le PDF d'origine</a>`:""}</p>`;
+  }else{
+    const c=d.chapitres[i],av=d.chapitres[i-1],ap=d.chapitres[i+1];
+    h=`<div class="barre"><button type="button" class="retour" data-ouvrir="">← ${esc(d.titre)}</button><span class="doux">Étape ${i+1} sur ${n}</span></div>${chapitreHtml(d,c,i)}
+    <div class="suite">${av?`<button type="button" class="tuile mini" data-ouvrir="${esc(av.id)}"><span class="ico">←</span><span><span class="desc">Étape précédente</span><span class="lbl">${esc(av.titre)}</span></span></button>`:"<span></span>"}${ap?`<button type="button" class="tuile mini droite" data-ouvrir="${esc(ap.id)}"><span><span class="desc">Étape suivante</span><span class="lbl">${esc(ap.titre)}</span></span><span class="ico">→</span></button>`:""}</div>`;
+  }
+  $("#vue").innerHTML=h;scrollTo(0,0);
+}
+function rendre(){
+  const d=DOCS.find(x=>x.slug===slugCourant());
+  document.title=d?d.titre+" – Modes d'emploi ASMT 65":"Modes d'emploi ASMT 65";
+  if(d&&!E.q)document_(d);else accueil();
+}
+document.addEventListener("click",ev=>{
+  const b=ev.target.closest("button");
+  if(ev.target.closest("#loupe")){const l=$("#loupe");if(ev.target.tagName==="IMG"&&!l.classList.contains("grand")){l.classList.add("grand");return}l.classList.remove("ouvert","grand");return}
+  if(!b)return;
+  if(b.id==="accueil"){E.q="";$("#q").value="";E.logiciel=E.thematique=E.public="";aller("")}
+  else if(b.dataset.filtre){const k=b.dataset.filtre;E[k]=E[k]===b.dataset.val?"":b.dataset.val;accueil()}
+  else if("ouvrir" in b.dataset){E.chapitre=b.dataset.ouvrir;rendre()}
+  else if(b.dataset.img){const l=$("#loupe");l.querySelector("img").src=b.dataset.img;l.classList.add("ouvert");l.scrollTop=0}
+  else if("doc" in b.dataset){E.q="";$("#q").value="";aller(b.dataset.doc,b.dataset.ch)}
+});
+document.addEventListener("keydown",ev=>{if(ev.key==="Escape")$("#loupe").classList.remove("ouvert","grand")});
+let attente;
+$("#q").addEventListener("input",ev=>{clearTimeout(attente);attente=setTimeout(()=>{E.q=ev.target.value;if(E.q.trim())accueil();else rendre()},120)});
+addEventListener("hashchange",rendre);
+rendre();
+</script>
+</body>
+</html>
