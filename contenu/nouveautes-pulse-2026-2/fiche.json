@@ -1,0 +1,211 @@
+{
+ "titre": "Nouveautés de Pulse : version 2026.2",
+ "icone": "🚀",
+ "resume": "Ce qui change depuis le déploiement du 25 mars 2026 : politique de confidentialité, dossier administratif, planning, champ « Genre », temps des sensibilisations.",
+ "logiciel": "Pulse",
+ "thematique": "Nouveautés de version",
+ "publics": [
+  "Tous"
+ ],
+ "version": 1,
+ "date": "2026-11-11",
+ "note": "",
+ "pdf_telechargeable": false,
+ "captures": true,
+ "masques": {
+  "2": [
+   [
+    0.302,
+    0.352,
+    0.706,
+    0.371
+   ],
+   [
+    0.814,
+    0.337,
+    0.871,
+    0.351
+   ],
+   [
+    0.218,
+    0.412,
+    0.327,
+    0.482
+   ],
+   [
+    0.421,
+    0.412,
+    0.526,
+    0.493
+   ],
+   [
+    0.619,
+    0.412,
+    0.785,
+    0.429
+   ],
+   [
+    0.784,
+    0.438,
+    0.882,
+    0.454
+   ],
+   [
+    0.302,
+    0.543,
+    0.706,
+    0.558
+   ],
+   [
+    0.814,
+    0.53,
+    0.871,
+    0.544
+   ],
+   [
+    0.227,
+    0.596,
+    0.396,
+    0.681
+   ],
+   [
+    0.498,
+    0.596,
+    0.614,
+    0.616
+   ],
+   [
+    0.498,
+    0.638,
+    0.662,
+    0.708
+   ],
+   [
+    0.762,
+    0.596,
+    0.926,
+    0.653
+   ]
+  ],
+  "3": [
+   [
+    0.26,
+    0.437,
+    0.36,
+    0.457
+   ],
+   [
+    0.633,
+    0.421,
+    0.86,
+    0.441
+   ],
+   [
+    0.142,
+    0.533,
+    0.85,
+    0.667
+   ]
+  ],
+  "4": [
+   [
+    0.12,
+    0.281,
+    0.335,
+    0.329
+   ],
+   [
+    0.7,
+    0.25,
+    0.785,
+    0.274
+   ],
+   [
+    0.7,
+    0.277,
+    0.885,
+    0.383
+   ],
+   [
+    0.797,
+    0.222,
+    0.845,
+    0.235
+   ],
+   [
+    0.38,
+    0.826,
+    0.73,
+    0.844
+   ]
+  ]
+ },
+ "chapitres": [
+  {
+   "id": "politique-confidentialite",
+   "titre": "Accepter la politique de confidentialité",
+   "icone": "🔐",
+   "pages": [
+    1
+   ],
+   "essentiel": "<p>La version 2026.2 de Pulse est déployée le mercredi 25 mars 2026. À la première connexion, une fenêtre s'ouvre si vous n'avez pas encore accepté les Conditions d'utilisation et la Politique de confidentialité.</p><ol><li>Saisissez vos identifiants Pulse.</li><li>Cochez la case « J'accepte les Conditions d'Utilisation et la Politique de Confidentialité ».</li><li>Cliquez sur « CONTINUER ».</li></ol><p class=\"note\">Attention : sans cette acceptation, l'accès à Pulse est refusé.</p><p>Une fois connecté, vous pouvez relire la Politique de confidentialité à tout moment, depuis n'importe quelle page, par le lien de la ligne d'information de Pulse.</p>"
+  },
+  {
+   "id": "dossier-administratif",
+   "titre": "Dossier administratif : des champs réorganisés",
+   "icone": "🗂️",
+   "pages": [
+    2
+   ],
+   "essentiel": "<p>La section « Dossier administratif » du salarié a été réorganisée, en consultation comme en édition.</p><ul><li>Les champs suivent un ordre plus logique et plus lisible.</li><li>Les informations liées sont regroupées.</li><li>Les champs rarement utilisés ou propres à un contexte peuvent être masqués.</li><li>Le champ « Nom complet » est supprimé. Il est remplacé par des champs distincts pour le nom.</li><li>Le libellé « Prénom » devient « Liste des prénoms ».</li><li>L'affichage des champs s'adapte au contexte régional et à la configuration du système.</li></ul>"
+  },
+  {
+   "id": "heure-anticipation",
+   "titre": "Convocations : une heure d'anticipation configurable",
+   "icone": "⏰",
+   "pages": [],
+   "essentiel": "<ul><li>Un nouveau réglage permet d'ajuster l'heure affichée sur les documents de convocation par rapport à l'heure planifiée.</li><li>Il sert quand le salarié doit arriver plus tôt que l'heure prévue de la visite médicale.</li></ul>"
+  },
+  {
+   "id": "remarques-en-attente",
+   "titre": "Remarques « En attente » : une visibilité par profil",
+   "icone": "👁️",
+   "pages": [],
+   "essentiel": "<ul><li>La visibilité des remarques « En attente » des visites médicales se règle maintenant par profil utilisateur.</li><li>Un administrateur peut autoriser un profil à voir les remarques générales, tout en masquant les raisons précises pour lesquelles une visite n'est pas terminée.</li><li>Cela permet d'appliquer des règles de confidentialité plus strictes quand c'est nécessaire.</li></ul>"
+  },
+  {
+   "id": "apercu-plages-horaires",
+   "titre": "Planning : plus d'adhérent présélectionné",
+   "icone": "📅",
+   "pages": [
+    3
+   ],
+   "essentiel": "<ul><li>Dans l'Agenda, la vue « Aperçu des plages horaires » s'ouvre maintenant sans adhérent présélectionné.</li><li>Les entités de planning peuvent être créées sans adhérent.</li><li>Vous pouvez donc planifier une visite directement depuis un dossier salarié : le filtre « Adhérent » reste vide et les créneaux disponibles s'affichent sans étape supplémentaire.</li></ul>"
+  },
+  {
+   "id": "libelles-roles",
+   "titre": "Recherche de planning : infirmier(ère) et assistant(e) médical(e) mieux distingués",
+   "icone": "🏷️",
+   "pages": [],
+   "essentiel": "<ul><li>Plusieurs libellés de la Recherche de planning ont été mis à jour, dans les champs de recherche comme dans les colonnes de la grille.</li><li>L'infirmier(ère) et l'assistant(e) médical(e) sont désormais clairement identifiés, dans la zone de recherche et dans la table de résultats.</li></ul>"
+  },
+  {
+   "id": "champ-genre",
+   "titre": "Un nouveau champ « Genre »",
+   "icone": "👤",
+   "pages": [
+    4
+   ],
+   "essentiel": "<p>Un champ « Genre » est ajouté à la page « Dossier administratif » du salarié. Il distingue le sexe biologique du salarié et son identité de genre.</p><ul><li>En mode édition : choisissez le genre dans la liste déroulante.</li><li>En mode affichage : un libellé reprend le genre sélectionné.</li><li>Les icônes sont mises à jour dans l'en-tête du salarié et sur les pages « Visites médicales ».</li></ul>"
+  },
+  {
+   "id": "temps-sensibilisations",
+   "titre": "Enregistrer le temps passé sur une sensibilisation",
+   "icone": "⏱️",
+   "pages": [
+    4
+   ],
+   "essentiel": "<p>Vous pouvez enregistrer le temps consacré à une sensibilisation, directement dans son dossier. Deux options de saisie : préparer une sensibilisation et animer une sensibilisation.</p><h4>Ajouter un enregistrement</h4><ol><li>Depuis l'en-tête, ouvrez le module « Gestion des sensibilisations ».</li><li>Ouvrez le dossier de la sensibilisation.</li><li>Sélectionnez l'onglet « Enregistrement de temps ».</li><li>Ouvrez le menu à trois points et sélectionnez « Ajouter ».</li><li>Saisissez les informations demandées dans la fenêtre, puis enregistrez.</li></ol><h4>Supprimer un enregistrement</h4><ol><li>Cochez la case de l'enregistrement.</li><li>Dans le menu à trois points, sélectionnez « Supprimer ».</li></ol>"
+  }
+ ]
+}

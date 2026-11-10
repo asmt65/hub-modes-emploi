@@ -82,10 +82,22 @@ def textes_pages(slug):
 def main():
     cible = sys.argv[1] if len(sys.argv) > 1 else None
     docs = []
+    # Les source.pdf ne sont pas versionnés : sans PDF, on garde l'entrée déjà publiée dans data.js.
+    anciens = {}
+    if (RACINE / "data.js").exists():
+        brut = (RACINE / "data.js").read_text(encoding="utf-8").strip()
+        anciens = {d["slug"]: d for d in json.loads(brut[len("window.HUB="):].rstrip(";"))["docs"]}
     for dossier in sorted(CONTENU.iterdir()):
         if not (dossier / "fiche.json").exists():
             continue
         slug = dossier.name
+        if not (dossier / "source.pdf").exists():
+            if slug in anciens:
+                docs.append(anciens[slug])
+                print(f"{slug} : PDF absent, entrée existante conservée")
+            else:
+                print(f"{slug} : PDF absent et jamais publié, ignoré")
+            continue
         fiche = json.loads((dossier / "fiche.json").read_text(encoding="utf-8"))
         pages = sorted({n for c in fiche["chapitres"] for n in c["pages"]})
         if not fiche.get("captures", True):

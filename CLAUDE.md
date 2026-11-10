@@ -19,6 +19,6 @@ Site statique (GitHub Pages) destiné aux collaborateurs de l'ASMT 65. Aucun bui
 
 ## Règles
 - `"captures": false` dans une fiche publie le document sans ses pages d'origine (cas d'un PDF dont les captures contiennent des données réelles). Remettre à `true` une fois le PDF nettoyé.
-- Les `source.pdf` ne sont pas versionnés (`.gitignore`) : le dépôt est public et un PDF peut contenir des données que les masques ne couvrent pas. Pour régénérer les images d'un document, redemander le PDF.
+- Les `source.pdf` ne sont pas versionnés (`.gitignore`) : le dépôt est public et un PDF peut contenir des données que les masques ne couvrent pas. Pour régénérer les images d'un document, redemander le PDF. Sans `source.pdf`, `construire.py` conserve l'entrée déjà publiée dans `data.js` : on peut donc ajouter un document sans avoir les PDF des autres.
 - Charte : vert #60BB46, orange #F37537, rose #EF599A, marine #172F57, bleu #2091D0, police Lato. Pas de violet.
 - Le site ne doit pas être indexé (`noindex`, `robots.txt`).
