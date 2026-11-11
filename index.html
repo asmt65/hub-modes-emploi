@@ -227,6 +227,48 @@ body{background:
 .bandeau{box-shadow:0 14px 32px rgba(0,0,0,.26),0 30px 70px rgba(239,89,154,.2)}
 footer,.aide-clavier{color:#7fa6c4;opacity:1}
 #loupe{background:rgba(5,18,31,.95)}
+
+/* cartes et émojis : grille de cartes blanches, pictogramme dans un carré arrondi teinté */
+.groupe{display:flex;flex-direction:column;gap:16px}
+.surtitre{margin:0;display:flex;align-items:center;gap:10px;color:#fff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.surtitre em{font-style:normal;color:#ff9d7e}
+.surtitre svg{width:16px;height:16px;color:var(--bleu)}
+.surtitre::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.28),transparent)}
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px}
+.emoji{flex:none;width:56px;height:56px;border-radius:18px;display:grid;place-items:center;font-size:1.65rem;line-height:1;background:linear-gradient(145deg,#eaf4fb,#f4eef6);box-shadow:inset 0 0 0 1px rgba(32,145,208,.1);transition:transform .2s cubic-bezier(.3,1.4,.5,1),background .2s}
+.doc,.pas{position:relative;text-align:left;cursor:pointer;border:0;background:#fff;border-radius:26px;display:flex;gap:16px;box-shadow:0 1px 2px rgba(0,0,0,.2),0 12px 28px rgba(0,0,0,.24);transition:transform .18s,box-shadow .18s;overflow:hidden}
+.doc::after,.pas::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--chaud);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.doc:hover,.doc:focus-visible,.pas:hover,.pas:focus-visible{transform:translateY(-4px);box-shadow:0 2px 4px rgba(0,0,0,.2),0 22px 44px rgba(0,0,0,.34)}
+.doc:hover::after,.doc:focus-visible::after,.pas:hover::after,.pas:focus-visible::after{transform:scaleX(1)}
+.doc:hover .emoji,.pas:hover .emoji{transform:scale(1.1) rotate(-6deg)}
+.doc{padding:24px 24px 22px;align-items:flex-start;min-height:150px}
+.doc .emoji{width:64px;height:64px;border-radius:20px;font-size:1.9rem}
+.corps{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+.doc .nom{font-size:1.2rem;font-weight:900;letter-spacing:-.01em;line-height:1.22;padding-right:26px}
+.resume{font-size:.93rem;color:#5b6678;line-height:1.4}
+.doc .date{margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 0}
+.doc .neuf{background:var(--chaud);color:#fff;letter-spacing:.06em;padding:3px 10px;font-size:.62rem;text-transform:uppercase}
+.fleche{position:absolute;right:22px;top:26px;width:10px;height:10px;border-right:2.5px solid var(--corail);border-top:2.5px solid var(--corail);transform:rotate(45deg);transition:transform .18s}
+.doc:hover .fleche{transform:translateX(4px) rotate(45deg)}
+.grille:not(.etapes){grid-template-columns:repeat(auto-fill,minmax(min(440px,100%),1fr))}
+.grille.etapes{grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px}
+.pas{padding:16px 18px;align-items:center;border-radius:22px;min-height:88px}
+.pas .nom{font-size:1.02rem;font-weight:700;line-height:1.25;letter-spacing:0}
+.pas .date{color:var(--bleu);font-weight:700}
+.pas .corps{gap:3px}
+.bandeau{display:grid;grid-template-columns:auto 1fr;column-gap:22px;align-items:center}
+.bandeau .emoji{grid-row:1/4;width:84px;height:84px;border-radius:26px;font-size:2.5rem;background:rgba(255,255,255,.22);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),0 10px 24px rgba(0,0,0,.12);backdrop-filter:blur(4px)}
+.bandeau h1{margin:4px 0 6px}
+.chapitre .titre{align-items:center;gap:18px}
+.chapitre .titre .emoji{width:64px;height:64px;border-radius:20px;font-size:1.9rem}
+.chapitre .titre small{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--corail);margin-bottom:4px}
+.touche .nom{font-weight:700}
+@media (max-width:700px){
+  .doc{padding:18px;border-radius:22px;min-height:0}.doc .emoji{width:52px;height:52px;font-size:1.5rem;border-radius:16px}
+  .bandeau{grid-template-columns:1fr}.bandeau .emoji{grid-row:auto;width:60px;height:60px;font-size:1.8rem;border-radius:18px;margin-bottom:10px}
+  .chapitre .titre{gap:12px}.chapitre .titre .emoji{width:48px;height:48px;font-size:1.4rem;border-radius:14px}
+}
+@media (prefers-reduced-motion:reduce){.doc,.pas,.emoji,.doc::after,.pas::after,.fleche{transition:none}}
 </style>
 </head>
 <body>
@@ -342,7 +384,7 @@ function accueil(){
     docs.forEach(d=>d.chapitres.forEach((c,i)=>{const e=evaluer(c,mots);if(e)touches.push({d,c,i,e})}));
     touches.sort((a,b)=>b.e.score-a.e.score);
     h+=`<section class="carte apparait"><h1 class="titre">${EPINGLE}<span>Résultats <em>de la recherche</em></span></h1>`;
-    h+=touches.length?`<ul class="liste">${touches.map(t=>`<li><button type="button" class="ligne touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><span class="nom"><b>${t.i+1}.</b>${esc(t.c.titre)}</span><span class="date">${esc(t.d.logiciel)} · ${esc(t.d.titre)}</span><span class="extrait">${extrait(t.c,t.e.vus)}</span>${t.e.approx?`<em class="approx">Orthographe approchante</em>`:""}</button></li>`).join("")}</ul>`
+    h+=touches.length?`<ul class="liste">${touches.map(t=>`<li><button type="button" class="ligne touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><span class="nom">${t.c.icone?t.c.icone+" ":""}${esc(t.c.titre)}</span><span class="date">Étape ${t.i+1} · ${esc(t.d.logiciel)} · ${esc(t.d.titre)}</span><span class="extrait">${extrait(t.c,t.e.vus)}</span>${t.e.approx?`<em class="approx">Orthographe approchante</em>`:""}</button></li>`).join("")}</ul>`
       :`<p class="vide">Aucune étape ne contient « ${esc(E.q.trim())} ». Essayez un seul mot, ou un terme affiché à l'écran dans le logiciel.</p>`;
     h+=`</section>`;
   }else if(!docs.length){
@@ -350,24 +392,24 @@ function accueil(){
   }else{
     const groupes=[...new Set(docs.map(d=>d.logiciel))].sort((a,b)=>a.localeCompare(b,"fr"));
     const nbE=docs.reduce((s,d)=>s+d.chapitres.length,0);
-    h+=`<div class="hero apparait"><h1>Modes d'emploi</h1><p>${docs.length} document${docs.length>1?"s":""} · ${nbE} étapes · mis à jour le ${jourCourt(docs.map(d=>d.date).sort().pop())}</p></div><div class="colonnes apparait">${groupes.map(g=>`<section class="carte"><h2 class="titre">${EPINGLE}<span>Modes d'emploi <em>${esc(g)}</em></span></h2><ul class="liste">${docs.filter(d=>d.logiciel===g).map(d=>`<li><button type="button" class="ligne fiche" data-doc="${esc(d.slug)}"><span class="nom">${recent(d.date)?`<em class="neuf">[${d.version>1?"MIS À JOUR":"NOUVEAU"}]</em>`:""}${esc(d.titre)}</span><span class="date">${d.version>1?"Mis à jour":"Ajouté"} le ${jourCourt(d.date)} · ${esc(d.thematique)} · ${d.chapitres.length} étapes</span></button></li>`).join("")}</ul></section>`).join("")}</div>`;
+    h+=`<div class="hero apparait"><h1>Modes d'emploi</h1><p>${docs.length} document${docs.length>1?"s":""} · ${nbE} étapes · mis à jour le ${jourCourt(docs.map(d=>d.date).sort().pop())}</p></div>${groupes.map(g=>`<section class="groupe apparait"><h2 class="surtitre">${EPINGLE}<span>Modes d'emploi <em>${esc(g)}</em></span></h2><div class="grille">${docs.filter(d=>d.logiciel===g).map(d=>`<button type="button" class="doc fiche" data-doc="${esc(d.slug)}"><span class="emoji">${d.icone||"📘"}</span><span class="corps"><span class="nom">${esc(d.titre)}</span><span class="resume">${esc(d.resume||"")}</span><span class="date">${recent(d.date)?`<em class="neuf">${d.version>1?"Mis à jour":"Nouveau"}</em>`:""}${esc(d.thematique)} · ${d.chapitres.length} étapes · ${jourCourt(d.date)}</span></span><span class="fleche" aria-hidden="true"></span></button>`).join("")}</div></section>`).join("")}`;
   }
   $("#vue").innerHTML=h;
 }
 function chapitreHtml(d,c,i){
-  return `<section class="carte chapitre apparait"><h1 class="titre">${EPINGLE}<span><b>${i+1}.</b>${esc(c.titre)}</span></h1><div class="essentiel">${c.essentiel}</div>${c.pages.length?`<div class="origine"><span>Captures d'écran du document d'origine</span><div class="pages">${c.pages.map(p=>`<div><button type="button" class="page" data-img="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" aria-label="Agrandir la page ${p.n}"><img loading="lazy" width="${p.l}" height="${p.h}" src="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" alt="Page ${p.n} du document d'origine"></button><p class="legende">Page ${p.n} sur ${d.nbPages}. Cliquez pour agrandir.</p></div>`).join("")}</div></div>`:""}</section>`;
+  return `<section class="carte chapitre apparait"><h1 class="titre"><span class="emoji">${c.icone||i+1}</span><span><small>Étape ${i+1} sur ${d.chapitres.length}</small>${esc(c.titre)}</span></h1><div class="essentiel">${c.essentiel}</div>${c.pages.length?`<div class="origine"><span>Captures d'écran du document d'origine</span><div class="pages">${c.pages.map(p=>`<div><button type="button" class="page" data-img="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" aria-label="Agrandir la page ${p.n}"><img loading="lazy" width="${p.l}" height="${p.h}" src="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" alt="Page ${p.n} du document d'origine"></button><p class="legende">Page ${p.n} sur ${d.nbPages}. Cliquez pour agrandir.</p></div>`).join("")}</div></div>`:""}</section>`;
 }
 function document_(d){
   const n=d.chapitres.length,i=d.chapitres.findIndex(c=>c.id===route().ch);
   let h;
   if(i<0){
     h=`<button type="button" class="lien" data-doc="">← Tous les modes d'emploi</button>
-    <div class="bandeau apparait"><span class="date">${esc(d.logiciel)} · ${esc(d.thematique)}</span><h1>${esc(d.titre)}</h1><p>Version ${d.version} du ${jourCourt(d.date)}${d.note?" · "+esc(d.note):""}${d.pdf?` · <a href="docs/${esc(d.slug)}/original.pdf">Télécharger le PDF d'origine</a>`:""}</p></div>
-    <section class="carte apparait"><h2 class="titre">${EPINGLE}<span>Que voulez-vous <em>faire ?</em></span></h2><ul class="liste">${d.chapitres.map((c,k)=>`<li><button type="button" class="ligne etape" data-ouvrir="${esc(c.id)}"><span class="nom"><b>${k+1}.</b>${esc(c.titre)}</span></button></li>`).join("")}</ul></section>`;
+    <div class="bandeau apparait"><span class="emoji">${d.icone||"📘"}</span><span class="date">${esc(d.logiciel)} · ${esc(d.thematique)}</span><h1>${esc(d.titre)}</h1><p>Version ${d.version} du ${jourCourt(d.date)}${d.note?" · "+esc(d.note):""}${d.pdf?` · <a href="docs/${esc(d.slug)}/original.pdf">Télécharger le PDF d'origine</a>`:""}</p></div>
+    <section class="groupe apparait"><h2 class="surtitre">${EPINGLE}<span>Que voulez-vous <em>faire ?</em></span></h2><div class="grille etapes">${d.chapitres.map((c,k)=>`<button type="button" class="pas etape" data-ouvrir="${esc(c.id)}"><span class="emoji">${c.icone||k+1}</span><span class="corps"><span class="date">Étape ${k+1}</span><span class="nom">${esc(c.titre)}</span></span></button>`).join("")}</div></section>`;
   }else{
     const c=d.chapitres[i],av=d.chapitres[i-1],ap=d.chapitres[i+1];
     h=`<div class="barre"><button type="button" class="lien" data-ouvrir="">← Toutes les étapes</button><span class="date">${esc(d.titre)} · ${i+1} sur ${n}</span></div>${chapitreHtml(d,c,i)}
-    <div class="suite">${av?`<button type="button" class="tuile" data-ouvrir="${esc(av.id)}"><span class="desc">← Étape précédente</span><span class="lbl">${esc(av.titre)}</span></button>`:"<span></span>"}${ap?`<button type="button" class="tuile droite" data-ouvrir="${esc(ap.id)}"><span class="desc">Étape suivante →</span><span class="lbl">${esc(ap.titre)}</span></button>`:""}</div><p class="aide-clavier">Flèches ← → pour changer d'étape · / pour chercher</p>`;
+    <div class="suite">${av?`<button type="button" class="tuile" data-ouvrir="${esc(av.id)}"><span class="desc">← Étape précédente</span><span class="lbl">${av.icone||""} ${esc(av.titre)}</span></button>`:"<span></span>"}${ap?`<button type="button" class="tuile droite" data-ouvrir="${esc(ap.id)}"><span class="desc">Étape suivante →</span><span class="lbl">${ap.icone||""} ${esc(ap.titre)}</span></button>`:""}</div><p class="aide-clavier">Flèches ← → pour changer d'étape · / pour chercher</p>`;
   }
   $("#vue").innerHTML=h;scrollTo(0,0);
 }
