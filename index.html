@@ -9,258 +9,127 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-/* Layout : bandeau marine avec la recherche, puis soit la bibliothèque (filtres + cartes), soit un document (sommaire fixe à gauche, chapitres à droite). */
+/* Identité de l'extranet ASMT : fond bleu en dégradé, cartes blanches très arrondies, accents en dégradé rose→orange, titres bicolores en capitales. Une colonne de cartes ; thème unique, par choix. */
 :root{
-  --fond:#f3f6fa; --carte:#ffffff; --encre:#172F57; --encre-doux:#55657f; --trait:#d9e1ec; --creux:#eaf0f7;
-  --bleu:#2091D0; --vert:#60BB46; --orange:#F37537; --rose:#EF599A;
-  --bandeau:#172F57; --sur-bandeau:#ffffff; --lien:#1878b0;
+  --bleu:#2091D0; --bleu-nuit:#0d4d7d; --encre:#1d2b3a; --encre-doux:#8a94a3; --trait:#e3e8ee; --carte:#f7f8fa;
+  --rose:#EF599A; --orange:#F37537; --corail:#F0625A; --vert:#60BB46;
+  --chaud:linear-gradient(135deg,#EF599A 0%,#F37537 100%);
   --corps:"Lato",system-ui,-apple-system,"Segoe UI",sans-serif;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --fond:#0d1727; --carte:#152238; --encre:#e8eef7; --encre-doux:#9fb0c8; --trait:#2a3b57; --creux:#1c2c47;
-    --bandeau:#0a1322; --sur-bandeau:#e8eef7; --lien:#62b8ea; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --fond:#0d1727; --carte:#152238; --encre:#e8eef7; --encre-doux:#9fb0c8; --trait:#2a3b57; --creux:#1c2c47;
-  --bandeau:#0a1322; --sur-bandeau:#e8eef7; --lien:#62b8ea; color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 html,body{margin:0}
-body{background:var(--fond);color:var(--encre);font-family:var(--corps);font-size:16.5px;line-height:1.55}
+body{background:linear-gradient(120deg,#2191d0 0%,#14679f 45%,#0d4d7d 100%) fixed;background-color:#14679f;color:var(--encre);font-family:var(--corps);font-size:17px;line-height:1.5;min-height:100vh}
 img{max-width:100%;height:auto;display:block}
 button{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
-header{background:var(--bandeau);color:var(--sur-bandeau);position:relative}
-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--bleu) 0 25%,var(--vert) 25% 50%,var(--orange) 50% 75%,var(--rose) 75% 100%)}
-.tete{max-width:1180px;margin:0 auto;padding:20px 16px 24px;display:flex;gap:16px 28px;align-items:center;flex-wrap:wrap}
-.marque{background:none;border:0;padding:0;cursor:pointer;text-align:left;color:inherit}
-.marque b{display:block;font-size:1.45rem;font-weight:900;letter-spacing:-.01em;line-height:1.2}
-.marque span{opacity:.75;font-size:.9rem}
-.cherche{flex:1 1 300px;position:relative}
-.cherche input{width:100%;font:inherit;font-size:1.05rem;padding:12px 14px 12px 44px;border-radius:12px;border:2px solid transparent;background:#fff;color:#172F57}
-.cherche svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:#55657f}
-main{max-width:1180px;margin:0 auto;padding:24px 16px 56px}
-h1{font-size:1.7rem;font-weight:900;line-height:1.2;margin:0 0 6px;text-wrap:balance}
-h2{font-size:1.3rem;font-weight:900;margin:0 0 12px;text-wrap:balance}
-.doux{color:var(--encre-doux)}
-/* filtres */
-.filtres{display:flex;flex-direction:column;gap:10px;margin:0 0 22px}
-.rangee{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.rangee>span{font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--encre-doux);min-width:92px}
-.puce{font-weight:700;border:2px solid var(--trait);background:var(--carte);border-radius:999px;padding:5px 14px;cursor:pointer}
-.puce:hover{border-color:var(--c)}
-.puce[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px var(--corail)}
+h1:focus,h2:focus{outline:none;box-shadow:none}
+/* barre du haut */
+header{position:sticky;top:0;z-index:5;padding:14px 16px 0}
+.tete{max-width:1000px;margin:0 auto;background:var(--bleu);border-radius:999px;padding:8px;display:flex;gap:10px;align-items:center;box-shadow:0 6px 20px rgba(6,40,70,.28)}
+.cherche{flex:1;position:relative;min-width:0}
+.cherche input{width:100%;font:inherit;border:0;border-radius:999px;background:#fff;color:var(--encre);padding:11px 46px 11px 22px}
+.cherche input::placeholder{color:var(--encre);opacity:.85}
+.cherche svg{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:22px;height:22px;color:var(--encre);pointer-events:none}
+.marque{border:0;cursor:pointer;background:var(--chaud);color:#fff;font-weight:700;border-radius:999px;padding:11px 26px;white-space:nowrap}
+main{max-width:1000px;margin:0 auto;padding:26px 16px 40px;display:flex;flex-direction:column;gap:22px}
+footer{max-width:1000px;margin:0 auto;padding:0 16px 30px;color:rgba(255,255,255,.75);font-size:.85rem;text-align:center}
 /* cartes */
-.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
-.fiche{background:var(--carte);border:1px solid var(--trait);border-left:6px solid var(--bleu);border-radius:12px;padding:16px 18px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:transform .12s,box-shadow .12s}
-.fiche:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(23,47,87,.12)}
-.fiche b{font-size:1.1rem;line-height:1.3}
-.fiche p{margin:0;color:var(--encre-doux);font-size:.95rem}
-.etiquettes{display:flex;gap:6px;flex-wrap:wrap;font-size:.76rem;font-weight:900}
-.etiquettes span{border-radius:999px;padding:2px 10px;background:var(--creux)}
-.etiquettes .logiciel{background:var(--vert);color:#fff}
-.etiquettes .neuf{background:var(--rose);color:#fff}
-.meta{font-size:.82rem;color:var(--encre-doux);margin-top:auto}
-/* résultats */
-.resultats{display:flex;flex-direction:column;gap:10px}
-.touche{background:var(--carte);border:1px solid var(--trait);border-radius:12px;padding:12px 16px;text-align:left;cursor:pointer}
-.touche:hover{border-color:var(--bleu)}
-.touche small{color:var(--encre-doux);display:block}
-.touche b{display:block}
-.touche p{margin:4px 0 0;font-size:.93rem;color:var(--encre-doux)}
-mark{background:color-mix(in srgb,var(--orange) 35%,transparent);color:inherit;border-radius:3px;padding:0 2px}
-.vide{background:var(--carte);border:1px dashed var(--trait);border-radius:12px;padding:26px;text-align:center;color:var(--encre-doux)}
-/* document */
-.retour{background:none;border:0;padding:0;color:var(--lien);font-weight:700;cursor:pointer;margin-bottom:14px}
-.doc{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px;align-items:start}
-.sommaire{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:var(--carte);border:1px solid var(--trait);border-radius:12px;padding:14px}
-.sommaire strong{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--encre-doux);margin-bottom:8px}
-.sommaire ol{margin:0;padding:0;list-style:none;counter-reset:ch;display:flex;flex-direction:column;gap:2px}
-.sommaire button{counter-increment:ch;width:100%;text-align:left;background:none;border:0;border-radius:8px;padding:7px 9px;cursor:pointer;display:flex;gap:8px;line-height:1.3;font-size:.95rem}
-.sommaire button::before{content:counter(ch);font-weight:900;color:var(--bleu);min-width:1.2em;font-variant-numeric:tabular-nums}
-.sommaire button:hover,.sommaire button.ici{background:var(--creux)}
-.sommaire button.ici{font-weight:700}
-.chapitre{background:var(--carte);border:1px solid var(--trait);border-radius:14px;padding:22px;margin-bottom:20px;scroll-margin-top:14px}
-.chapitre>h2{display:flex;gap:12px;align-items:baseline}
-.chapitre>h2 i{font-style:normal;color:#fff;background:var(--bleu);border-radius:8px;min-width:1.7em;text-align:center;font-size:1rem;padding:2px 6px}
-.essentiel{max-width:72ch}
-.essentiel h4{margin:18px 0 6px;font-size:1.02rem;font-weight:900}
+.carte{background:var(--carte);border-radius:30px;padding:28px 32px 26px;box-shadow:0 10px 30px rgba(6,40,70,.22)}
+.colonnes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));gap:22px;align-items:start}
+.titre{margin:0 0 4px;padding:0 0 14px;font-size:1.12rem;font-weight:400;text-transform:uppercase;letter-spacing:.01em;display:flex;gap:14px;align-items:flex-start;border-bottom:2px dotted var(--bleu);text-wrap:balance}
+.titre em{font-style:normal;color:var(--corail)}
+.titre svg{width:20px;height:20px;color:var(--bleu);flex:none;margin-top:3px}
+.date{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--encre-doux)}
+.neuf{font-style:normal;color:var(--corail);font-size:.78rem;font-weight:700;margin-right:6px;white-space:nowrap}
+/* listes à puces bleues */
+.liste{list-style:none;margin:0;padding:0}
+.liste li+li{border-top:1px solid var(--trait)}
+.ligne{width:100%;text-align:left;background:none;border:0;cursor:pointer;padding:15px 8px 15px 34px;position:relative;display:flex;flex-direction:column;gap:3px;border-radius:12px;transition:background .12s,padding .12s}
+.ligne::before{content:"";position:absolute;left:8px;top:24px;width:9px;height:9px;border-radius:50%;background:var(--bleu);box-shadow:0 0 0 4px rgba(32,145,208,.16)}
+.ligne:hover,.ligne:focus-visible{background:#fff;padding-left:40px}
+.ligne:hover .nom{color:var(--corail)}
+.nom{font-size:1.08rem;line-height:1.3}
+.nom b{font-weight:700;color:var(--bleu);margin-right:6px;font-variant-numeric:tabular-nums}
+.extrait{font-size:.92rem;color:#56627a;margin-top:3px}
+mark{background:rgba(243,117,55,.25);color:inherit;border-radius:3px;padding:0 2px}
+.approx{font-style:normal;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--corail)}
+.vide{color:#56627a;margin:14px 0 0}
+/* filtres */
+.filtres{display:flex;flex-direction:column;gap:8px}
+.filtres:empty{display:none}
+.rangee{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.rangee>span{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);min-width:88px}
+.puce{border:0;background:rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:6px 16px;cursor:pointer;font-weight:700}
+.puce:hover{background:rgba(255,255,255,.3)}
+.puce[aria-pressed="true"]{background:var(--chaud)}
+/* liens et bandeau du document */
+.lien{background:none;border:0;padding:0;color:#fff;font-weight:700;cursor:pointer;text-align:left}
+.lien:hover{text-decoration:underline}
+.barre{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.barre .date{color:rgba(255,255,255,.8)}
+.bandeau{background:var(--chaud);color:#fff;border-radius:30px;padding:26px 32px;box-shadow:0 10px 30px rgba(6,40,70,.22)}
+.bandeau .date{color:rgba(255,255,255,.85)}
+.bandeau h1{margin:6px 0 6px;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;line-height:1.2;text-wrap:balance}
+.bandeau p{margin:0;font-size:.92rem;opacity:.92}
+.bandeau a{color:#fff}
+/* fiche d'étape */
+.chapitre .titre{font-size:1.3rem;text-transform:none;font-weight:700}
+.chapitre .titre b{color:var(--corail);margin-right:4px}
+.essentiel{max-width:70ch;padding-top:16px}
+.essentiel h4{margin:22px 0 8px;font-size:.86rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--corail)}
+.essentiel h4:first-child{margin-top:0}
 .essentiel p{margin:0 0 10px}
-.essentiel ul,.essentiel ol{margin:0 0 12px;padding-left:1.3em;display:flex;flex-direction:column;gap:5px}
-.essentiel ol li::marker{font-weight:900;color:var(--bleu)}
-.essentiel .alerte,.essentiel .note{border-left:4px solid var(--orange);background:var(--creux);padding:9px 14px;border-radius:0 10px 10px 0}
+.essentiel ul,.essentiel ol{margin:0 0 12px;padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
+.essentiel ul{list-style:none;padding-left:0}
+.essentiel ul li{position:relative;padding-left:22px}
+.essentiel ul li::before{content:"";position:absolute;left:2px;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--bleu)}
+.essentiel ol li::marker{font-weight:700;color:var(--bleu)}
+.essentiel .alerte,.essentiel .note{background:#fff;border-left:5px solid var(--corail);border-radius:0 14px 14px 0;padding:11px 16px}
 .essentiel .note{border-left-color:var(--bleu)}
-.origine{margin-top:18px;border-top:1px solid var(--trait);padding-top:14px}
-.origine>span{display:block;font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--encre-doux);margin-bottom:10px}
+.origine{margin-top:22px;padding-top:16px;border-top:2px dotted var(--bleu)}
+.origine>span{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-doux);margin-bottom:12px}
 .pages{display:flex;flex-direction:column;gap:14px}
-.page{border:1px solid var(--trait);border-radius:10px;overflow:hidden;background:#fff;padding:0;cursor:zoom-in;display:block;width:100%}
+.page{border:1px solid var(--trait);border-radius:16px;overflow:hidden;background:#fff;padding:0;cursor:zoom-in;display:block;width:100%}
 .page img{width:100%}
-.legende{font-size:.8rem;color:var(--encre-doux);margin:4px 2px 0}
+.legende{font-size:.74rem;color:var(--encre-doux);margin:5px 4px 0}
+/* précédent / suivant */
+.suite{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tuile{border:0;cursor:pointer;background:var(--chaud);color:#fff;border-radius:22px;padding:14px 22px;display:flex;flex-direction:column;gap:2px;text-align:left;box-shadow:0 8px 22px rgba(6,40,70,.22);transition:transform .12s}
+.tuile:hover{transform:translateY(-3px)}
+.tuile.droite{text-align:right;align-items:flex-end}
+.tuile .desc{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;opacity:.9}
+.tuile .lbl{font-weight:700;line-height:1.25}
+.aide-clavier{font-size:.78rem;color:rgba(255,255,255,.7);text-align:center;margin:0}
 /* visionneuse */
-#loupe{position:fixed;inset:0;background:rgba(8,14,26,.92);display:none;z-index:10;overflow:auto;padding:52px 12px 20px;cursor:zoom-out}
+#loupe{position:fixed;inset:0;background:rgba(6,30,52,.94);display:none;z-index:10;overflow:auto;padding:56px 12px 20px;cursor:zoom-out}
 #loupe.ouvert{display:block}
-#loupe img{margin:0 auto;background:#fff;max-width:none;width:min(1400px,100%)}
-#loupe.grand img{width:1400px}
-#loupe button{position:fixed;top:10px;right:14px;background:#fff;color:#172F57;border:0;border-radius:8px;padding:8px 14px;font-weight:900;cursor:pointer}
-footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--encre-doux);font-size:.85rem}
-@media (max-width:860px){
-  .doc{grid-template-columns:1fr;gap:16px}
-  .sommaire{position:static;max-height:none}
-  .rangee>span{min-width:100%}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fiche{transition:none}}
-
-/* tuiles et fiches, dans l'esprit du manuel employeur */
-header{position:sticky;top:0;z-index:5;box-shadow:0 2px 12px rgba(23,47,87,.25)}
+#loupe img{margin:0 auto;background:#fff;max-width:none;width:min(1400px,100%);cursor:zoom-in;border-radius:8px}
+#loupe.grand img{width:1400px;cursor:zoom-out}
+#loupe button{position:fixed;top:12px;right:16px;background:var(--chaud);color:#fff;border:0;border-radius:999px;padding:8px 20px;font-weight:700;cursor:pointer}
 .apparait{animation:apparait .25s ease}
 @keyframes apparait{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.intro{text-align:center;margin:6px 0 26px;display:flex;flex-direction:column;align-items:center;gap:8px}
-.intro p{margin:0;max-width:60ch}
-.ico{width:52px;height:52px;border-radius:14px;background:var(--creux);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex:none;font-weight:900;color:var(--bleu)}
-.tuiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.tuile{background:var(--carte);border:2px solid transparent;border-radius:16px;padding:20px 18px;cursor:pointer;text-align:left;display:flex;align-items:center;gap:16px;box-shadow:0 1px 4px rgba(23,47,87,.1);transition:transform .15s,box-shadow .15s,border-color .15s}
-.tuile:hover,.tuile:focus-visible{transform:translateY(-3px);box-shadow:0 8px 20px rgba(23,47,87,.16);border-color:var(--c,var(--bleu))}
-.tuile:hover .ico{transform:rotate(-6deg) scale(1.08)}
-.tuile .ico{transition:transform .15s;background:color-mix(in srgb,var(--c,var(--bleu)) 16%,var(--carte))}
-.tuiles .tuile:nth-child(4n+1){--c:var(--bleu)}.tuiles .tuile:nth-child(4n+2){--c:var(--vert)}.tuiles .tuile:nth-child(4n+3){--c:var(--orange)}.tuiles .tuile:nth-child(4n){--c:var(--rose)}
-.lbl{display:block;font-weight:900;line-height:1.3}
-.desc{display:block;font-size:.8rem;color:var(--encre-doux);margin-top:2px}
-.pied-doc{text-align:center;margin:24px 0 0;font-size:.88rem}
-.fiche{flex-direction:row;align-items:flex-start;gap:16px;border-left-width:1px;border:2px solid transparent;border-radius:16px;box-shadow:0 1px 4px rgba(23,47,87,.1)}
-.fiche:hover{border-color:var(--vert)}
-.fiche .ico{background:color-mix(in srgb,var(--vert) 18%,var(--carte))}
-.fiche .corps{display:flex;flex-direction:column;gap:8px;min-width:0}
-.grille{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
-.barre{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.barre .retour{margin:0}
-.chapitre{max-width:900px;margin-left:auto;margin-right:auto;padding:28px 30px;border-radius:16px}
-.barre,.suite{max-width:900px;margin-left:auto;margin-right:auto}
-.chapitre>h2{align-items:center;font-size:1.45rem;gap:14px}
-.suite{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.tuile.mini{padding:12px 14px}
-.tuile.mini .ico{width:40px;height:40px;font-size:1.1rem}
-.tuile.droite{justify-content:flex-end;text-align:right}
-@media (max-width:600px){.suite{grid-template-columns:1fr}.chapitre{padding:20px 16px}.grille{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.apparait{animation:none}.tuile,.tuile .ico{transition:none}}
-
-/* identité asmt65.fr : blocs marine en dégradé, liseré de couleur, titres bicolores, grands arrondis */
-:root{--fond:#f1f5f9;--degrade:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)),linear-gradient(#3a4b8f 0%,#172f57 100%)}
-header{background:var(--degrade);border-radius:0 0 44px 44px;box-shadow:none}
-header::after{display:none}
-.tete{display:grid;grid-template-columns:1fr;gap:18px;padding:22px 20px 40px}
-.marque b{font-size:1.2rem}
-.marque b i,.accroche i,.bi i,.pt{font-style:normal;color:var(--orange)}
-.accroche p{margin:0;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;line-height:1.12;letter-spacing:-.01em;color:#fff}
-.accroche em{font-style:normal;color:var(--orange)}
-.accroche em i{color:#fff}
-.trait{display:block;width:64px;height:6px;border-radius:3px;background:var(--orange);margin-top:18px}
-.cherche{max-width:680px}
-.cherche input{border-radius:14px;padding:15px 16px 15px 46px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-body.interieur header{border-radius:0 0 28px 28px}
-body.interieur .accroche{display:none}
-body.interieur .tete{grid-template-columns:auto 1fr;align-items:center;padding:16px 20px 20px}
-main{padding-top:34px}
-h1.bi{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:700;line-height:1.15}
-h1.bi em{font-style:normal;color:var(--orange)}
-h1.bi i.n{color:var(--encre)}
-.intro{margin-bottom:30px}
-.tuile,.fiche{background:var(--degrade);color:#fff;border:0;border-bottom:7px solid var(--c,var(--orange));border-radius:12px;box-shadow:0 6px 18px rgba(23,47,87,.18);position:relative;padding:22px 20px 26px;min-height:128px;align-items:flex-start}
-.tuile:hover,.tuile:focus-visible,.fiche:hover{border-color:var(--c,var(--orange));transform:translateY(-4px);box-shadow:0 14px 28px rgba(23,47,87,.3)}
-.tuile .ico,.fiche .ico{background:rgba(255,255,255,.14);color:#fff}
-.lbl,.fiche b{font-weight:700;font-size:1.18rem;padding-right:34px}
-.desc,.fiche p,.fiche .meta{color:rgba(255,255,255,.75)}
-.pt{color:var(--c,var(--orange))}
-.go{position:absolute;right:14px;bottom:14px;width:38px;height:38px;border-radius:8px;background:var(--c,var(--orange));color:#fff;display:grid;place-items:center;font-size:1.5rem;font-weight:900;line-height:1;padding-bottom:4px;transition:transform .15s}
-.tuile:hover .go,.fiche:hover .go{transform:translateX(4px)}
-.fiche{--c:var(--orange);padding-bottom:30px}
-.grille .fiche:nth-child(4n+2){--c:var(--rose)}.grille .fiche:nth-child(4n+3){--c:var(--vert)}.grille .fiche:nth-child(4n){--c:var(--bleu)}
-.fiche .etiquettes span{background:rgba(255,255,255,.16);color:#fff}
-.fiche .etiquettes .logiciel{background:var(--vert)}.fiche .etiquettes .neuf{background:var(--rose)}
-.fiche .meta{padding-right:44px}
-.tuiles .tuile:nth-child(4n+1){--c:var(--orange)}.tuiles .tuile:nth-child(4n+2){--c:var(--rose)}.tuiles .tuile:nth-child(4n+3){--c:var(--vert)}.tuiles .tuile:nth-child(4n){--c:var(--bleu)}
-.tuile.mini{min-height:0;padding:14px 16px;align-items:center;--c:var(--orange)}
-.tuile.mini .lbl{font-size:1rem;padding:0}
-.chapitre{border:0;border-radius:28px;box-shadow:0 2px 14px rgba(23,47,87,.08);padding:34px 36px}
-.chapitre>h2{font-size:clamp(1.4rem,3.4vw,2rem);font-weight:700}
-.chapitre>h2 .ico{background:var(--degrade)}
-.essentiel h4{border-left:5px solid var(--orange);padding-left:10px;font-weight:700}
-.essentiel ol li::marker{color:var(--orange)}
-.essentiel .alerte{border-radius:0 12px 12px 0}
-.retour{color:var(--orange)}
-.puce[aria-pressed="true"]{background:var(--orange);border-color:var(--orange)}
-.touche{border-radius:14px;border-left:6px solid var(--orange)}
-@media (max-width:700px){body.interieur .tete{grid-template-columns:1fr}.chapitre{padding:22px 18px;border-radius:20px}header{border-radius:0 0 28px 28px}}
-
-/* allègement : une seule signature forte par écran */
-.compte,.sur{font-size:.78rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--encre-doux);margin:0 0 14px;display:block}
-.sur em{font-style:normal;background:var(--rose);color:#fff;border-radius:999px;padding:1px 9px;margin-left:6px;letter-spacing:.03em}
-.grille{grid-template-columns:repeat(auto-fill,minmax(300px,380px));gap:20px}
-.fiche{flex-direction:column;gap:10px;padding:26px 24px 30px;min-height:190px}
-.fiche .sur{color:rgba(255,255,255,.7);margin:0}
-.fiche b{font-size:1.35rem;line-height:1.25;padding-right:0}
-.fiche p{padding-right:48px;font-size:.95rem}
-.entete{margin:6px 0 26px;max-width:760px}
-.entete .sur{margin-bottom:8px}
-.etapes{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px;max-width:980px}
-.etape{display:flex;align-items:center;gap:14px;text-align:left;background:var(--carte);border:0;border-radius:14px;padding:12px 16px 12px 12px;cursor:pointer;box-shadow:0 1px 3px rgba(23,47,87,.07);transition:transform .12s,box-shadow .12s}
-.etape:hover,.etape:focus-visible{transform:translateX(4px);box-shadow:0 6px 16px rgba(23,47,87,.13)}
-.etape .ico{width:44px;height:44px;border-radius:12px;font-size:1.3rem;background:var(--fond)}
-.etape .lbl{font-weight:700;font-size:1.02rem;padding:0;flex:1}
-.etape .fl{color:var(--orange);font-weight:900;opacity:0;transition:opacity .12s}
-.etape:hover .fl,.etape:focus-visible .fl{opacity:1}
-.pied-doc{text-align:left;margin-top:22px}
-.tuile.mini{background:var(--carte);color:var(--encre);border-bottom:0;box-shadow:0 1px 3px rgba(23,47,87,.07)}
-.tuile.mini .ico{background:var(--fond);color:var(--orange)}
-.tuile.mini .desc{color:var(--encre-doux)}
-.chapitre{padding:30px 34px}
-.chapitre>h2{font-size:clamp(1.3rem,3vw,1.7rem);margin-bottom:18px}
-.chapitre>h2 .ico{background:var(--fond)}
-.essentiel{font-size:1.03rem}
-footer{padding-top:8px;opacity:.8}
-@media (prefers-reduced-motion:reduce){.etape{transition:none}}
-
-/* ergonomie */
-.etape .lbl small{display:inline-block;min-width:1.5em;font-weight:900;color:var(--encre-doux);font-size:.82rem;font-variant-numeric:tabular-nums}
-h1:focus,h2:focus{outline:none}
-.grille{grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),380px))}
-.etapes{grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr))}
-.page{cursor:zoom-in}
-#loupe img{cursor:zoom-in}#loupe.grand img{cursor:zoom-out}
-.aide-clavier{font-size:.8rem;color:var(--encre-doux);text-align:center;margin:14px 0 0}
-@media (hover:none){.aide-clavier{display:none}.etape .fl{opacity:1}}
+@media (hover:none){.aide-clavier{display:none}}
 @media (max-width:700px){
-  body.interieur .marque span{display:none}
-  body.interieur .tete{padding:10px 14px 14px;gap:8px}
-  body.interieur .cherche input{padding:10px 12px 10px 40px;font-size:1rem}
-  .accroche p{font-size:1.75rem}.tete{padding:16px 16px 28px}
-  main{padding:20px 14px 44px}
-  #loupe{padding:48px 0 12px}
+  body{font-size:16px}
+  header{padding:10px 10px 0}
+  .marque{padding:10px 16px;font-size:.9rem}
+  .cherche input{padding:10px 40px 10px 16px}
+  main{padding:18px 10px 32px;gap:16px}
+  .carte,.bandeau{border-radius:22px;padding:20px 18px}
+  .suite{grid-template-columns:1fr}
+  #loupe{padding:52px 0 12px}
 }
-
-.barre{align-items:baseline}
-.barre .retour{text-align:left;white-space:nowrap}
-.barre .doux{font-size:.88rem;text-align:right}
-@media (max-width:700px){
-  .chapitre{padding:20px 16px}
-  .chapitre>h2{gap:10px;font-size:1.25rem}
-  .chapitre>h2 .ico{width:40px;height:40px;font-size:1.15rem;border-radius:10px}
-  .essentiel{font-size:1rem}
-  .essentiel ul,.essentiel ol{padding-left:1.1em}
-  .barre .doux{width:100%;text-align:left}
-}
-.approx{display:inline-block;margin-top:6px;font-style:normal;font-size:.76rem;font-weight:700;color:var(--encre-doux);background:var(--creux);border-radius:999px;padding:1px 9px}
+@media (max-width:420px){.marque{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.apparait{animation:none}.ligne,.tuile{transition:none}}
 </style>
 </head>
 <body>
 <header>
   <div class="tete">
-    <button class="marque" id="accueil" type="button"><b>Modes d'emploi<i>.</i></b><span>ASMT 65 · Prévention et Santé</span></button>
-    <div class="accroche"><p>Un logiciel vous résiste<i>.</i><br><em>On vous montre<i>.</i></em></p><span class="trait"></span></div>
-    <label class="cherche" for="q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
-      <input id="q" type="search" placeholder="Chercher : planning, statut…" autocomplete="off"></label>
+    <label class="cherche" for="q"><input id="q" type="search" placeholder="Rechercher un mode d'emploi" autocomplete="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></label>
+    <button class="marque" id="accueil" type="button">Modes d'emploi</button>
   </div>
 </header>
 <main id="vue"></main>
@@ -343,9 +212,9 @@ function evaluer(c,mots){
 function route(){const h=decodeURIComponent(location.hash.slice(1));if(!h.startsWith("doc-"))return{slug:"",ch:""};const i=h.indexOf("--");return i<0?{slug:h.slice(4),ch:""}:{slug:h.slice(4,i),ch:h.slice(i+2)}}
 function aller(slug,chapitre){const h=slug?"#doc-"+slug+(chapitre?"--"+chapitre:""):"#accueil";if(location.hash===h)rendre();else location.hash=h}
 
-function rangee(nom,cle,valeurs,couleur){
+function rangee(nom,cle,valeurs){
   if(valeurs.length<2)return "";
-  return `<div class="rangee"><span>${nom}</span>${valeurs.map(v=>`<button type="button" class="puce" style="--c:var(${couleur})" data-filtre="${cle}" data-val="${esc(v)}" aria-pressed="${E[cle]===v}">${esc(v)}</button>`).join("")}</div>`;
+  return `<div class="rangee"><span>${nom}</span>${valeurs.map(v=>`<button type="button" class="puce" data-filtre="${cle}" data-val="${esc(v)}" aria-pressed="${E[cle]===v}">${esc(v)}</button>`).join("")}</div>`;
 }
 function extrait(c,mots){
   const brut=c.recherche,p=c._p;let i=-1;
@@ -357,39 +226,43 @@ function extrait(c,mots){
   s=esc(s).replace(/\u0001/g,"<mark>").replace(/\u0002/g,"</mark>");
   return s;
 }
+const EPINGLE='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.5 2.5 21.5 9.5l-2 .6-3.3 3.3.4 4.6-1.5 1.5-4-4-5.6 5.6-1-1L10 14.5l-4-4L7.5 9l4.6.4 3.3-3.3z"/></svg>';
+const jourCourt=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("fr-FR")}catch(e){return d}};
 function accueil(){
   const mots=plat(E.q).split(/\s+/).filter(m=>m.length>1);
   const garde=d=>(!E.logiciel||d.logiciel===E.logiciel)&&(!E.thematique||d.thematique===E.thematique)&&(!E.public||d.publics.includes(E.public)||d.publics.includes("Tous"));
   const docs=DOCS.filter(garde);
-  let h=`<div class="filtres">${rangee("Logiciel","logiciel",uniques(d=>[d.logiciel]),"--vert")}${rangee("Thématique","thematique",uniques(d=>[d.thematique]),"--orange")}${rangee("Je suis","public",uniques(d=>d.publics).filter(p=>p!=="Tous"),"--bleu")}</div>`;
+  let h=`<div class="filtres">${rangee("Logiciel","logiciel",uniques(d=>[d.logiciel]))}${rangee("Thématique","thematique",uniques(d=>[d.thematique]))}${rangee("Je suis","public",uniques(d=>d.publics).filter(p=>p!=="Tous"))}</div>`;
   if(mots.length){
     const touches=[];
     docs.forEach(d=>d.chapitres.forEach((c,i)=>{const e=evaluer(c,mots);if(e)touches.push({d,c,i,e})}));
     touches.sort((a,b)=>b.e.score-a.e.score);
-    h+=`<h1>${touches.length} résultat${touches.length>1?"s":""} pour « ${esc(E.q.trim())} »</h1><p class="doux">La recherche porte sur tout le contenu des documents.</p>`;
-    h+=touches.length?`<div class="resultats">${touches.map(t=>`<button type="button" class="touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><small>${esc(t.d.logiciel)} · ${esc(t.d.titre)}</small><b>${t.i+1}. ${esc(t.c.titre)}</b><p>${extrait(t.c,t.e.vus)}</p>${t.e.approx?`<em class="approx">Orthographe approchante</em>`:""}</button>`).join("")}</div>`
-      :`<div class="vide">Aucun passage ne contient ces mots. Essayez un seul mot, ou un terme affiché à l'écran dans le logiciel.</div>`;
+    h+=`<section class="carte apparait"><h1 class="titre">${EPINGLE}<span>Résultats <em>de la recherche</em></span></h1>`;
+    h+=touches.length?`<ul class="liste">${touches.map(t=>`<li><button type="button" class="ligne touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><span class="nom"><b>${t.i+1}.</b>${esc(t.c.titre)}</span><span class="date">${esc(t.d.logiciel)} · ${esc(t.d.titre)}</span><span class="extrait">${extrait(t.c,t.e.vus)}</span>${t.e.approx?`<em class="approx">Orthographe approchante</em>`:""}</button></li>`).join("")}</ul>`
+      :`<p class="vide">Aucune étape ne contient « ${esc(E.q.trim())} ». Essayez un seul mot, ou un terme affiché à l'écran dans le logiciel.</p>`;
+    h+=`</section>`;
+  }else if(!docs.length){
+    h+=`<section class="carte"><p class="vide" style="margin:0">${DOCS.length?"Aucun mode d'emploi ne correspond à ces filtres.":"Aucun mode d'emploi n'est encore publié."}</p></section>`;
   }else{
-    h+=`<p class="compte">${docs.length} mode${docs.length>1?"s":""} d'emploi</p>`;
-    h+=docs.length?`<div class="grille apparait">${docs.map(d=>`<button type="button" class="fiche" data-doc="${esc(d.slug)}"><span class="sur">${esc(d.logiciel)} · ${esc(d.thematique)}${recent(d.date)?` <em>${d.version>1?"Mis à jour":"Nouveau"}</em>`:""}</span><b>${esc(d.titre)}<i class="pt">.</i></b><p>${esc(d.resume||"")}</p><span class="go" aria-hidden="true">»</span></button>`).join("")}</div>`
-      :`<div class="vide">${DOCS.length?"Aucun document ne correspond à ces filtres.":"Aucun mode d'emploi n'est encore publié."}</div>`;
+    const groupes=[...new Set(docs.map(d=>d.logiciel))].sort((a,b)=>a.localeCompare(b,"fr"));
+    h+=`<div class="colonnes apparait">${groupes.map(g=>`<section class="carte"><h1 class="titre">${EPINGLE}<span>Modes d'emploi <em>${esc(g)}</em></span></h1><ul class="liste">${docs.filter(d=>d.logiciel===g).map(d=>`<li><button type="button" class="ligne fiche" data-doc="${esc(d.slug)}"><span class="nom">${recent(d.date)?`<em class="neuf">[${d.version>1?"MIS À JOUR":"NOUVEAU"}]</em>`:""}${esc(d.titre)}</span><span class="date">${d.version>1?"Mis à jour":"Ajouté"} le ${jourCourt(d.date)} · ${esc(d.thematique)} · ${d.chapitres.length} étapes</span></button></li>`).join("")}</ul></section>`).join("")}</div>`;
   }
   $("#vue").innerHTML=h;
 }
 function chapitreHtml(d,c,i){
-  return `<section class="chapitre apparait"><h2><span class="ico">${c.icone||i+1}</span><span>${esc(c.titre)}</span></h2><div class="essentiel">${c.essentiel}</div>${c.pages.length?`<div class="origine"><span>Captures et détail, pages d'origine</span><div class="pages">${c.pages.map(p=>`<div><button type="button" class="page" data-img="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" aria-label="Agrandir la page ${p.n}"><img loading="lazy" width="${p.l}" height="${p.h}" src="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" alt="Page ${p.n} du document d'origine"></button><p class="legende">Page ${p.n} sur ${d.nbPages}. Cliquez pour agrandir.</p></div>`).join("")}</div></div>`:""}</section>`;
+  return `<section class="carte chapitre apparait"><h1 class="titre">${EPINGLE}<span><b>${i+1}.</b>${esc(c.titre)}</span></h1><div class="essentiel">${c.essentiel}</div>${c.pages.length?`<div class="origine"><span>Captures d'écran du document d'origine</span><div class="pages">${c.pages.map(p=>`<div><button type="button" class="page" data-img="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" aria-label="Agrandir la page ${p.n}"><img loading="lazy" width="${p.l}" height="${p.h}" src="docs/${esc(d.slug)}/p${String(p.n).padStart(2,"0")}.webp" alt="Page ${p.n} du document d'origine"></button><p class="legende">Page ${p.n} sur ${d.nbPages}. Cliquez pour agrandir.</p></div>`).join("")}</div></div>`:""}</section>`;
 }
 function document_(d){
   const n=d.chapitres.length,i=d.chapitres.findIndex(c=>c.id===route().ch);
   let h;
   if(i<0){
-    h=`<button type="button" class="retour" data-doc="">← Tous les modes d'emploi</button><div class="entete apparait"><span class="sur">${esc(d.logiciel)} · ${esc(d.thematique)}</span><h1 class="bi">${esc(d.titre)}<i>.</i></h1></div>
-    <div class="etapes apparait">${d.chapitres.map((c,k)=>`<button type="button" class="etape" data-ouvrir="${esc(c.id)}"><span class="ico">${c.icone||k+1}</span><span class="lbl"><small>${k+1}</small>${esc(c.titre)}</span><span class="fl" aria-hidden="true">→</span></button>`).join("")}</div>
-    <p class="doux pied-doc">Version ${d.version} du ${jour(d.date)}${d.note?" · "+esc(d.note):""}${d.pdf?` · <a href="docs/${esc(d.slug)}/original.pdf" style="color:var(--lien)">Télécharger le PDF d'origine</a>`:""}</p>`;
+    h=`<button type="button" class="lien" data-doc="">← Tous les modes d'emploi</button>
+    <div class="bandeau apparait"><span class="date">${esc(d.logiciel)} · ${esc(d.thematique)}</span><h1>${esc(d.titre)}</h1><p>Version ${d.version} du ${jourCourt(d.date)}${d.note?" · "+esc(d.note):""}${d.pdf?` · <a href="docs/${esc(d.slug)}/original.pdf">Télécharger le PDF d'origine</a>`:""}</p></div>
+    <section class="carte apparait"><h2 class="titre">${EPINGLE}<span>Que voulez-vous <em>faire ?</em></span></h2><ul class="liste">${d.chapitres.map((c,k)=>`<li><button type="button" class="ligne etape" data-ouvrir="${esc(c.id)}"><span class="nom"><b>${k+1}.</b>${esc(c.titre)}</span></button></li>`).join("")}</ul></section>`;
   }else{
     const c=d.chapitres[i],av=d.chapitres[i-1],ap=d.chapitres[i+1];
-    h=`<div class="barre"><button type="button" class="retour" data-ouvrir="">← Toutes les étapes</button><span class="doux">${esc(d.titre)} · ${i+1} sur ${n}</span></div>${chapitreHtml(d,c,i)}
-    <div class="suite">${av?`<button type="button" class="tuile mini" data-ouvrir="${esc(av.id)}"><span class="ico">←</span><span><span class="desc">Étape précédente</span><span class="lbl">${esc(av.titre)}</span></span></button>`:"<span></span>"}${ap?`<button type="button" class="tuile mini droite" data-ouvrir="${esc(ap.id)}"><span><span class="desc">Étape suivante</span><span class="lbl">${esc(ap.titre)}</span></span><span class="ico">→</span></button>`:""}</div><p class="aide-clavier">Flèches ← → pour changer d'étape · / pour chercher</p>`;
+    h=`<div class="barre"><button type="button" class="lien" data-ouvrir="">← Toutes les étapes</button><span class="date">${esc(d.titre)} · ${i+1} sur ${n}</span></div>${chapitreHtml(d,c,i)}
+    <div class="suite">${av?`<button type="button" class="tuile" data-ouvrir="${esc(av.id)}"><span class="desc">← Étape précédente</span><span class="lbl">${esc(av.titre)}</span></button>`:"<span></span>"}${ap?`<button type="button" class="tuile droite" data-ouvrir="${esc(ap.id)}"><span class="desc">Étape suivante →</span><span class="lbl">${esc(ap.titre)}</span></button>`:""}</div><p class="aide-clavier">Flèches ← → pour changer d'étape · / pour chercher</p>`;
   }
   $("#vue").innerHTML=h;scrollTo(0,0);
 }
