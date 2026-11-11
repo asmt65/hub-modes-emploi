@@ -208,6 +208,25 @@ footer{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8;
   .hero h1{font-size:2rem}
 }
 @media (prefers-reduced-motion:reduce){.page,.marque,.ligne::after{transition:none}}
+
+/* fond bleu nuit presque uni ; le bleu vif et le dégradé rose→orange restent les accents */
+body{background:
+  radial-gradient(1000px 560px at 8% -10%,rgba(32,145,208,.34),transparent 64%),
+  radial-gradient(720px 480px at 104% 12%,rgba(239,89,154,.13),transparent 62%),
+  linear-gradient(160deg,#0f3554 0%,#0b2942 55%,#082136 100%) fixed;background-color:#0b2942}
+.tete{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);box-shadow:0 10px 30px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.14)}
+.carte{border:0;box-shadow:0 1px 2px rgba(0,0,0,.2),0 14px 32px rgba(0,0,0,.26),0 36px 70px rgba(0,0,0,.2)}
+.hero p,.barre .date{color:#9fc9e8;opacity:1}
+.lien{color:#bfe0f5;opacity:1}
+.lien:hover{color:#fff}
+.puce{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.puce:hover{background:rgba(255,255,255,.16)}
+.rangee>span{color:#9fc9e8}
+.tuile{border:0;box-shadow:0 14px 32px rgba(0,0,0,.28)}
+.tuile:hover{box-shadow:0 20px 40px rgba(0,0,0,.36)}
+.bandeau{box-shadow:0 14px 32px rgba(0,0,0,.26),0 30px 70px rgba(239,89,154,.2)}
+footer,.aide-clavier{color:#7fa6c4;opacity:1}
+#loupe{background:rgba(5,18,31,.95)}
 </style>
 </head>
 <body>
