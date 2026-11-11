@@ -123,6 +123,91 @@ mark{background:rgba(243,117,55,.25);color:inherit;border-radius:3px;padding:0 2
 }
 @media (max-width:420px){.marque{display:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.apparait{animation:none}.ligne,.tuile{transition:none}}
+
+/* finition : profondeur douce, hiérarchie nette, micro-interactions */
+body{background:
+  radial-gradient(900px 520px at 12% -8%,rgba(255,255,255,.16),transparent 62%),
+  radial-gradient(760px 520px at 105% 18%,rgba(239,89,154,.14),transparent 60%),
+  linear-gradient(125deg,#2191d0 0%,#15699f 46%,#0c446f 100%) fixed;background-color:#15699f;-webkit-font-smoothing:antialiased}
+header{padding-top:16px}
+.tete{max-width:1040px;background:rgba(32,145,208,.72);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border:1px solid rgba(255,255,255,.22);box-shadow:0 10px 30px rgba(6,40,70,.28),inset 0 1px 0 rgba(255,255,255,.25)}
+.cherche input{padding:13px 48px 13px 24px;box-shadow:inset 0 0 0 1px rgba(13,77,125,.06);transition:box-shadow .15s}
+.cherche input:focus{outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 0 6px rgba(240,98,90,.55)}
+.marque{padding:13px 28px;letter-spacing:.01em;box-shadow:0 6px 16px rgba(239,89,154,.35);transition:transform .15s,box-shadow .15s}
+.marque:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(239,89,154,.45)}
+main,footer{max-width:1040px}
+main{gap:24px;padding-top:34px}
+.hero{color:#fff;padding:6px 6px 2px}
+.hero h1{margin:0;font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.hero p{margin:10px 0 0;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;opacity:.82}
+.carte{background:#fff;border-radius:28px;padding:30px 34px 22px;border:1px solid rgba(255,255,255,.6);box-shadow:0 1px 2px rgba(6,40,70,.08),0 12px 28px rgba(6,40,70,.16),0 32px 64px rgba(6,40,70,.12)}
+.titre{font-size:.95rem;font-weight:700;letter-spacing:.09em;padding-bottom:16px;border-bottom:1px dashed rgba(32,145,208,.55);align-items:center}
+.titre svg{margin-top:0;width:18px;height:18px}
+.date{letter-spacing:.08em;font-size:.68rem}
+.liste li+li{border-top:1px solid #eef1f5}
+.ligne{padding:17px 44px 17px 38px;border-radius:16px;transition:background .15s,transform .15s}
+.ligne::before{top:26px;width:8px;height:8px;left:12px;box-shadow:0 0 0 5px rgba(32,145,208,.12);transition:box-shadow .15s,background .15s}
+.ligne::after{content:"";position:absolute;right:18px;top:50%;width:9px;height:9px;border-right:2px solid var(--corail);border-top:2px solid var(--corail);transform:translate(-6px,-50%) rotate(45deg);opacity:0;transition:opacity .15s,transform .15s}
+.ligne:hover,.ligne:focus-visible{background:#f4f8fc;padding-left:38px}
+.ligne:hover::before{background:var(--corail);box-shadow:0 0 0 5px rgba(240,98,90,.14)}
+.ligne:hover::after,.ligne:focus-visible::after{opacity:1;transform:translate(0,-50%) rotate(45deg)}
+.ligne:hover .nom{color:var(--encre)}
+.nom{font-size:1.1rem;font-weight:700;letter-spacing:-.005em}
+.neuf{font-size:.66rem;letter-spacing:.08em;background:rgba(240,98,90,.12);border-radius:999px;padding:3px 9px;vertical-align:2px;margin-right:8px}
+/* étapes : pastille numérotée à la place de la puce */
+.etape{padding-left:62px;justify-content:center;min-height:62px}
+.etape::before{display:none}
+.etape:hover,.etape:focus-visible{padding-left:62px}
+.etape .nom{font-weight:400}
+.etape .nom b{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:#eaf4fb;color:var(--bleu);display:grid;place-items:center;margin:0;font-size:.95rem;transition:background .15s,color .15s}
+.etape:hover .nom b,.etape:focus-visible .nom b{background:var(--chaud);color:#fff}
+.touche .nom b{color:var(--corail)}
+.extrait{line-height:1.45}
+.puce{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);font-weight:400;transition:background .15s}
+.puce[aria-pressed="true"]{border-color:transparent;font-weight:700}
+.lien{opacity:.92;font-size:.92rem;letter-spacing:.01em}
+.bandeau{position:relative;overflow:hidden;border-radius:28px;padding:34px 38px;box-shadow:0 12px 28px rgba(6,40,70,.18),0 32px 64px rgba(239,89,154,.18)}
+.bandeau::before{content:"";position:absolute;right:-90px;top:-150px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.13)}
+.bandeau::after{content:"";position:absolute;right:70px;bottom:-190px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.09)}
+.bandeau>*{position:relative}
+.bandeau h1{font-weight:900;letter-spacing:-.015em;font-size:clamp(1.5rem,4vw,2.3rem);margin:10px 0 10px;max-width:22ch}
+.bandeau p{font-size:.86rem}
+/* fiche d'étape */
+.chapitre{padding:36px 42px 34px}
+.chapitre .titre{font-size:clamp(1.3rem,3vw,1.7rem);font-weight:900;letter-spacing:-.015em;line-height:1.2;border-bottom:0;padding-bottom:0;align-items:flex-start}
+.chapitre .titre svg{display:none}
+.chapitre .titre b{display:inline-grid;place-items:center;width:1.9em;height:1.9em;border-radius:50%;background:var(--chaud);color:#fff;font-size:.62em;margin-right:14px;vertical-align:.18em;box-shadow:0 6px 14px rgba(239,89,154,.35)}
+.essentiel{padding-top:26px;font-size:1.04rem;line-height:1.6;max-width:66ch}
+.essentiel h4{margin:30px 0 12px;letter-spacing:.1em;font-size:.76rem;display:flex;align-items:center;gap:12px}
+.essentiel h4::after{content:"";flex:1;height:1px;background:#eef1f5}
+.essentiel ol{list-style:none;padding:0;counter-reset:geste;gap:12px}
+.essentiel ol li{counter-increment:geste;position:relative;padding-left:44px;min-height:30px}
+.essentiel ol li::before{content:counter(geste);position:absolute;left:0;top:-1px;width:30px;height:30px;border-radius:50%;background:#eaf4fb;color:var(--bleu);font-weight:700;font-size:.86rem;display:grid;place-items:center}
+.essentiel ul{gap:9px}
+.essentiel ul li::before{top:.62em;width:7px;height:7px}
+.essentiel .alerte,.essentiel .note{border-left:0;border-radius:16px;padding:14px 18px 14px 20px;position:relative;font-size:.98rem}
+.essentiel .alerte{background:#fff4f1;box-shadow:inset 4px 0 0 var(--corail)}
+.essentiel .note{background:#f1f8fd;box-shadow:inset 4px 0 0 var(--bleu)}
+.origine{border-top:1px dashed rgba(32,145,208,.55);margin-top:30px;padding-top:22px}
+.origine>span{letter-spacing:.1em;font-size:.68rem;font-weight:700}
+.page{border-radius:18px;border:1px solid #e6ebf1;box-shadow:0 6px 18px rgba(6,40,70,.08);transition:transform .2s,box-shadow .2s}
+.page:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(6,40,70,.16)}
+/* précédent / suivant : cartes blanches, flèche en dégradé */
+.tuile{background:#fff;color:var(--encre);border-radius:22px;padding:16px 22px;box-shadow:0 12px 28px rgba(6,40,70,.16);border:1px solid rgba(255,255,255,.6);transition:transform .15s,box-shadow .15s}
+.tuile:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(6,40,70,.24)}
+.tuile .desc{color:var(--corail);font-weight:700;letter-spacing:.1em;font-size:.66rem;opacity:1}
+.tuile .lbl{font-size:1.02rem}
+footer{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;opacity:.8;padding-top:6px}
+#loupe{backdrop-filter:blur(6px)}
+@media (max-width:700px){
+  .carte{padding:22px 18px 14px;border-radius:24px}
+  .chapitre{padding:24px 20px}
+  .bandeau{padding:26px 22px;border-radius:24px}
+  .ligne{padding-right:14px}.ligne::after{display:none}
+  .essentiel ol li{padding-left:40px}
+  .hero h1{font-size:2rem}
+}
+@media (prefers-reduced-motion:reduce){.page,.marque,.ligne::after{transition:none}}
 </style>
 </head>
 <body>
@@ -245,7 +330,8 @@ function accueil(){
     h+=`<section class="carte"><p class="vide" style="margin:0">${DOCS.length?"Aucun mode d'emploi ne correspond à ces filtres.":"Aucun mode d'emploi n'est encore publié."}</p></section>`;
   }else{
     const groupes=[...new Set(docs.map(d=>d.logiciel))].sort((a,b)=>a.localeCompare(b,"fr"));
-    h+=`<div class="colonnes apparait">${groupes.map(g=>`<section class="carte"><h1 class="titre">${EPINGLE}<span>Modes d'emploi <em>${esc(g)}</em></span></h1><ul class="liste">${docs.filter(d=>d.logiciel===g).map(d=>`<li><button type="button" class="ligne fiche" data-doc="${esc(d.slug)}"><span class="nom">${recent(d.date)?`<em class="neuf">[${d.version>1?"MIS À JOUR":"NOUVEAU"}]</em>`:""}${esc(d.titre)}</span><span class="date">${d.version>1?"Mis à jour":"Ajouté"} le ${jourCourt(d.date)} · ${esc(d.thematique)} · ${d.chapitres.length} étapes</span></button></li>`).join("")}</ul></section>`).join("")}</div>`;
+    const nbE=docs.reduce((s,d)=>s+d.chapitres.length,0);
+    h+=`<div class="hero apparait"><h1>Modes d'emploi</h1><p>${docs.length} document${docs.length>1?"s":""} · ${nbE} étapes · mis à jour le ${jourCourt(docs.map(d=>d.date).sort().pop())}</p></div><div class="colonnes apparait">${groupes.map(g=>`<section class="carte"><h2 class="titre">${EPINGLE}<span>Modes d'emploi <em>${esc(g)}</em></span></h2><ul class="liste">${docs.filter(d=>d.logiciel===g).map(d=>`<li><button type="button" class="ligne fiche" data-doc="${esc(d.slug)}"><span class="nom">${recent(d.date)?`<em class="neuf">[${d.version>1?"MIS À JOUR":"NOUVEAU"}]</em>`:""}${esc(d.titre)}</span><span class="date">${d.version>1?"Mis à jour":"Ajouté"} le ${jourCourt(d.date)} · ${esc(d.thematique)} · ${d.chapitres.length} étapes</span></button></li>`).join("")}</ul></section>`).join("")}</div>`;
   }
   $("#vue").innerHTML=h;
 }
