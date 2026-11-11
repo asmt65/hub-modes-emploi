@@ -269,6 +269,23 @@ footer,.aide-clavier{color:#7fa6c4;opacity:1}
   .chapitre .titre{gap:12px}.chapitre .titre .emoji{width:48px;height:48px;font-size:1.4rem;border-radius:14px}
 }
 @media (prefers-reduced-motion:reduce){.doc,.pas,.emoji,.doc::after,.pas::after,.fleche{transition:none}}
+
+/* ESSAI fond bleu clair de l'extranet (retirer ce bloc pour revenir au bleu nuit) */
+body{background:
+  radial-gradient(900px 520px at 10% -8%,rgba(255,255,255,.2),transparent 62%),
+  radial-gradient(760px 520px at 105% 16%,rgba(239,89,154,.16),transparent 60%),
+  linear-gradient(125deg,#2a9bd9 0%,#1b78b4 48%,#125a8e 100%) fixed;background-color:#1b78b4}
+.tete{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);box-shadow:0 10px 30px rgba(6,40,70,.22),inset 0 1px 0 rgba(255,255,255,.3)}
+.carte,.doc,.pas,.tuile{box-shadow:0 1px 2px rgba(6,40,70,.1),0 12px 28px rgba(6,40,70,.2)}
+.doc:hover,.doc:focus-visible,.pas:hover,.pas:focus-visible,.tuile:hover{box-shadow:0 2px 4px rgba(6,40,70,.12),0 22px 44px rgba(6,40,70,.3)}
+.hero p,.barre .date,.rangee>span{color:rgba(255,255,255,.88)}
+.lien{color:#fff}
+.surtitre em{color:#ffd9c9}
+.surtitre svg{color:#fff}
+.puce{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.34)}
+footer,.aide-clavier{color:rgba(255,255,255,.78)}
+.bandeau{box-shadow:0 14px 32px rgba(6,40,70,.22),0 30px 60px rgba(239,89,154,.22)}
+#loupe{background:rgba(8,40,66,.94)}
 </style>
 </head>
 <body>
