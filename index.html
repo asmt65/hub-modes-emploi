@@ -251,6 +251,7 @@ h1:focus,h2:focus{outline:none}
   .essentiel ul,.essentiel ol{padding-left:1.1em}
   .barre .doux{width:100%;text-align:left}
 }
+.approx{display:inline-block;margin-top:6px;font-style:normal;font-size:.76rem;font-weight:700;color:var(--encre-doux);background:var(--creux);border-radius:999px;padding:1px 9px}
 </style>
 </head>
 <body>
@@ -275,7 +276,68 @@ const plat=t=>String(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/
 const jour=d=>{try{return new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}catch(e){return d}};
 const recent=d=>(Date.now()-new Date(d+"T12:00:00").getTime())<30*864e5;
 const uniques=f=>[...new Set(DOCS.flatMap(f))].sort((a,b)=>a.localeCompare(b,"fr"));
-DOCS.forEach(d=>d.chapitres.forEach(c=>{c._p=plat(c.recherche)}));
+// Synonymes et abréviations maison : chaque ligne est un groupe de termes équivalents. À compléter librement.
+const SYNONYMES=[
+  ["rdv","rendez-vous","rendez vous"],
+  ["fe","fiche d'entreprise","fiche entreprise"],
+  ["di","demande d'intervention"],
+  ["amt","action en milieu de travail"],
+  ["pj","piece jointe","document"],
+  ["agenda","planning","calendrier"],
+  ["supprimer","effacer","annuler"],
+  ["modifier","changer","corriger"],
+  ["deconnecter","deconnexion","fermeture de session"],
+  ["salarie","travailleur"],
+  ["adherent","entreprise","employeur"],
+  ["vehicule","voiture"],
+  ["telecharger","joindre","charger"]
+].map(g=>g.map(plat));
+const VOCAB=new Set();
+DOCS.forEach(d=>d.chapitres.forEach(c=>{c._p=plat(c.recherche);c._t=plat(c.titre);c._m=new Set(c._p.split(/[^a-z0-9]+/).filter(w=>w.length>2));c._m.forEach(w=>VOCAB.add(w))}));
+function distance(a,b,max){
+  if(Math.abs(a.length-b.length)>max)return max+1;
+  let pp=null,p=Array.from({length:b.length+1},(_,j)=>j);
+  for(let i=1;i<=a.length;i++){
+    const c=[i];let mini=i;
+    for(let j=1;j<=b.length;j++){
+      let v=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));
+      if(pp&&i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])v=Math.min(v,pp[j-2]+1);
+      c[j]=v;if(v<mini)mini=v;
+    }
+    if(mini>max)return max+1;
+    pp=p;p=c;
+  }
+  return p[b.length];
+}
+const memo=new Map();
+// Pour un mot tapé : ses formes exactes (lui-même + synonymes) et, à défaut, les mots proches du vocabulaire.
+function formes(m){
+  if(memo.has(m))return memo.get(m);
+  const exactes=new Set([m]);
+  SYNONYMES.forEach(g=>{if(g.includes(m))g.forEach(x=>exactes.add(x))});
+  const proches=new Set();
+  if(m.length>=4){
+    const max=m.length>=8?2:1;
+    VOCAB.forEach(w=>{if(w[0]===m[0]&&!w.includes(m)&&Math.min(distance(m,w,max),w.length>m.length?distance(m,w.slice(0,m.length),max):9)<=max)proches.add(w)});
+  }
+  const r={exactes:[...exactes],proches:[...proches]};memo.set(m,r);return r;
+}
+// Score d'une étape pour la requête, ou null si un mot manque. Renvoie aussi les formes trouvées, pour le surlignage.
+function evaluer(c,mots){
+  let score=0,approx=false;const vus=[];
+  for(const m of mots){
+    const f=formes(m);let s=0;
+    for(const x of f.exactes){
+      const entier=new RegExp("(^|[^a-z0-9])"+x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"($|[^a-z0-9])").test(c._p);
+      const debut=entier||(x.length<=3?new RegExp("(^|[^a-z0-9])"+x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).test(c._p):c._p.includes(x));
+      if(debut){vus.push(x);s=Math.max(s,(x===m?10:7)+(entier?5:0)+(c._t.includes(x)?8:0))}
+    }
+    if(!s){for(const w of f.proches){if(c._m.has(w)){vus.push(w);s=Math.max(s,3+(c._t.includes(w)?4:0))}}if(s)approx=true}
+    if(!s)return null;
+    score+=s;
+  }
+  return {score,approx,vus};
+}
 
 function route(){const h=decodeURIComponent(location.hash.slice(1));if(!h.startsWith("doc-"))return{slug:"",ch:""};const i=h.indexOf("--");return i<0?{slug:h.slice(4),ch:""}:{slug:h.slice(4,i),ch:h.slice(i+2)}}
 function aller(slug,chapitre){const h=slug?"#doc-"+slug+(chapitre?"--"+chapitre:""):"#accueil";if(location.hash===h)rendre();else location.hash=h}
@@ -301,9 +363,10 @@ function accueil(){
   let h=`<div class="filtres">${rangee("Logiciel","logiciel",uniques(d=>[d.logiciel]),"--vert")}${rangee("Thématique","thematique",uniques(d=>[d.thematique]),"--orange")}${rangee("Je suis","public",uniques(d=>d.publics).filter(p=>p!=="Tous"),"--bleu")}</div>`;
   if(mots.length){
     const touches=[];
-    docs.forEach(d=>d.chapitres.forEach((c,i)=>{if(mots.every(m=>c._p.includes(m)))touches.push({d,c,i})}));
+    docs.forEach(d=>d.chapitres.forEach((c,i)=>{const e=evaluer(c,mots);if(e)touches.push({d,c,i,e})}));
+    touches.sort((a,b)=>b.e.score-a.e.score);
     h+=`<h1>${touches.length} résultat${touches.length>1?"s":""} pour « ${esc(E.q.trim())} »</h1><p class="doux">La recherche porte sur tout le contenu des documents.</p>`;
-    h+=touches.length?`<div class="resultats">${touches.map(t=>`<button type="button" class="touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><small>${esc(t.d.logiciel)} · ${esc(t.d.titre)}</small><b>${t.i+1}. ${esc(t.c.titre)}</b><p>${extrait(t.c,mots)}</p></button>`).join("")}</div>`
+    h+=touches.length?`<div class="resultats">${touches.map(t=>`<button type="button" class="touche" data-doc="${esc(t.d.slug)}" data-ch="${esc(t.c.id)}"><small>${esc(t.d.logiciel)} · ${esc(t.d.titre)}</small><b>${t.i+1}. ${esc(t.c.titre)}</b><p>${extrait(t.c,t.e.vus)}</p>${t.e.approx?`<em class="approx">Orthographe approchante</em>`:""}</button>`).join("")}</div>`
       :`<div class="vide">Aucun passage ne contient ces mots. Essayez un seul mot, ou un terme affiché à l'écran dans le logiciel.</div>`;
   }else{
     h+=`<p class="compte">${docs.length} mode${docs.length>1?"s":""} d'emploi</p>`;
