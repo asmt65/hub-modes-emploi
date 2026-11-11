@@ -6,9 +6,9 @@
   "publics": [
     "Tous"
   ],
-  "version": 1,
+  "version": 2,
   "date": "2026-11-11",
-  "note": "",
+  "note": "Synthèse réécrite par tâche : 9 étapes plus courtes, pièges mis en avant.",
   "depot": "dmwbaph3x042d",
   "pdf_telechargeable": false,
   "masques": {
@@ -711,43 +711,24 @@
   },
   "chapitres": [
     {
-      "id": "tableau-de-bord",
-      "titre": "Le tableau de bord",
+      "id": "lancer-demande",
+      "titre": "Lancer une demande d'intervention",
       "pages": [
-        2
+        5,
+        6
       ],
-      "essentiel": "<p>Ce mode opératoire couvre les écrans principaux du module AMT : la demande d'intervention, la gestion du dossier et l'enregistrement du temps.</p><ul><li>À l'ouverture de Pulse, la page affichée est votre tableau de bord.</li><li>Son contenu dépend de votre profil d'utilisateur et des droits associés.</li><li>La navigation se fait avec le menu principal, en haut de l'écran.</li></ul>",
-      "icone": "🏠"
+      "icone": "✍️",
+      "essentiel": "<p class=\"alerte\">Ne faites une demande que si l'intervention doit être réalisée par un autre membre de l'équipe pluridisciplinaire que vous.</p><p>Choisissez votre point de départ :</p><ul><li><strong>Depuis le menu</strong> : icône AMT, « Demande d'intervention », puis menu ⋮ et « Créer une demande d'intervention ».</li><li><strong>Depuis un dossier adhérent</strong> : onglet « Dossier administratif adhérent », puis menu ⋮. L'adhérent est déjà sélectionné.</li><li><strong>Depuis un dossier salarié</strong> : onglet « Dossier administratif salarié », puis menu ⋮. L'adhérent est déjà saisi, et le salarié aussi si l'AMT le concerne. Aussi accessible depuis la visite médicale et le menu Résumé.</li></ul><p>Un adhérent peut aussi faire une demande depuis le Portail Adhérent.</p>"
     },
     {
-      "id": "personnaliser-affichage",
-      "titre": "Personnaliser l'affichage et se déconnecter",
+      "id": "remplir-demande",
+      "titre": "Remplir la demande d'intervention",
       "pages": [
-        3,
-        4
-      ],
-      "essentiel": "<h4>Se déconnecter</h4><ol><li>Cliquez sur la flèche à droite de votre nom.</li><li>Choisissez « Fermeture de session ».</li></ol><h4>Personnaliser le tableau de bord</h4><ol><li>Cliquez sur l'icône Paramètres, tout à droite de la barre du haut.</li><li>Dans le menu « Configuration », activez ou désactivez chaque bloc.</li><li>Glissez-déposez les blocs pour changer leur ordre à l'écran.</li><li>Cliquez sur « Sauvegarder la configuration ».</li></ol><p class=\"note\">La configuration vous est personnelle. Elle est reprise à la prochaine ouverture.</p>",
-      "icone": "⚙️"
-    },
-    {
-      "id": "menu-principal",
-      "titre": "Le menu principal",
-      "pages": [
-        5
-      ],
-      "essentiel": "<ul><li><strong>La goutte</strong>, en haut à gauche : activité médicale et messagerie interne. Vous y retrouvez les tâches à réaliser liées à votre activité.</li><li><strong>Le menu principal</strong> compte 14 icônes. Celles que vous voyez dépendent des droits de votre profil.</li><li><strong>Visites du jour, Agenda, Recherche</strong> (d'un salarié ou d'un adhérent) : ces écrans sont expliqués dans le document de support « Médical ».</li><li><strong>AMT</strong> donne accès à : Demande d'intervention, Demande d'information, Visite d'entreprise, Dossier psychosocial, Maintien dans l'emploi, Gestion des sensibilisations, Planning AMT, Enregistrement d'activités, Aperçu des prestations.</li></ul>",
-      "icone": "🧭"
-    },
-    {
-      "id": "creer-demande",
-      "titre": "Créer une demande d'intervention",
-      "pages": [
-        6,
         7,
         8
       ],
-      "essentiel": "<p class=\"alerte\">Faites une demande d'intervention uniquement si l'intervention doit être réalisée par un autre membre de l'équipe pluridisciplinaire que vous.</p><h4>Trois points d'entrée dans Pulse</h4><ul><li><strong>Page « Demande d'intervention »</strong> : icône AMT, puis « Demande d'intervention », puis menu ⋮ et « Créer une demande d'intervention ».</li><li><strong>Dossier adhérent</strong> : onglet « Dossier administratif adhérent », puis menu ⋮. L'adhérent est sélectionné automatiquement.</li><li><strong>Dossier salarié</strong> : onglet « Dossier administratif salarié », puis menu ⋮. L'adhérent est saisi automatiquement, et le salarié aussi si l'AMT le concerne. Cette entrée existe aussi depuis la visite médicale et le menu Résumé.</li></ul><p>Un adhérent peut également lancer une demande depuis le Portail Adhérent.</p><h4>Remplir la demande</h4><p>Tous les champs sont à renseigner, sauf ceux marqués « optionnel ».</p><ol><li><strong>Objectifs, en premier.</strong> Ce champ remplit automatiquement « Cible » et « Type d'intervention ». Les codes AMT1xx visent l'employeur (adhérent ou affilié). Les codes AMT4xx visent le travailleur et font apparaître son nom.</li><li><strong>Délai.</strong> Réservez « &lt; 01 mois » aux urgences : étude de poste ou fiche d'entreprise quand une inaptitude est envisagée.</li><li><strong>Attribution.</strong> Pour le service prévention, saisissez toujours le nom de l'assistante du service prévention. Si la demande a déjà été discutée avec un préventeur, indiquez son nom dans la description. Pour une IDEST, saisissez directement son nom.</li><li><strong>Thématique</strong>, en lien avec l'objectif, puis <strong>Origine de la demande</strong> : la personne, l'instance ou la situation qui la motive.</li><li><strong>Action en lien avec</strong> (optionnel) : seulement si la demande se rattache à un projet de service ou à un plan d'action collectif.</li><li><strong>Contact</strong> : à choisir parmi les contacts du dossier adhérent.</li><li><strong>Description</strong> : un maximum d'informations en texte libre. Elles seront reprises dans le dossier AMT une fois la demande acceptée.</li><li><strong>« Sauvegarder »</strong> enregistre et ferme. <strong>« Sauvegarder et ajouter »</strong> enregistre et laisse le module ouvert pour enchaîner plusieurs demandes.</li></ol><p class=\"alerte\">Erreur sur l'objectif ? Effacez d'abord les champs « Cible » et « Type d'intervention », puis saisissez le bon objectif.</p><p class=\"note\">Deux codes sont réservés : AMT4L0 pour les demandes de la CPDP, AMT4Q0 pour la psychologue du travail en suivi individuel.</p><p class=\"note\">« Charger un document » permet de joindre un fichier à la demande. Selon sa classe, il apparaîtra dans le dossier AMT, le dossier adhérent ou le dossier salarié.</p>",
-      "icone": "✍️"
+      "icone": "📝",
+      "essentiel": "<ol><li><strong>Objectifs, en premier.</strong> Il remplit seul « Cible » et « Type d'intervention ». AMT1xx : action vers l'employeur. AMT4xx : action vers le travailleur, dont le nom s'affiche.</li><li><strong>Délai</strong> : « &lt; 01 mois » uniquement pour les urgences (étude de poste ou fiche d'entreprise en cas d'inaptitude envisagée).</li><li><strong>Attribution</strong> : pour le service prévention, toujours le nom de l'assistante du service prévention. Pour une IDEST, directement son nom.</li><li><strong>Thématique</strong> (en lien avec l'objectif) et <strong>Origine de la demande</strong> (personne, instance ou situation qui la motive).</li><li><strong>Action en lien avec</strong> (optionnel) : seulement pour un projet de service ou un plan d'action collectif.</li><li><strong>Contact</strong> : choisissez parmi les contacts du dossier adhérent.</li><li><strong>Description</strong> : un maximum d'informations. Si la demande a été discutée et pré-attribuée à un préventeur, indiquez son nom ici.</li><li>« Sauvegarder » (ferme le module) ou « Sauvegarder et ajouter » (pour enchaîner une autre demande).</li></ol><p class=\"alerte\">Erreur d'objectif ? Effacez d'abord « Cible » et « Type d'intervention », puis ressaisissez l'objectif.</p><p class=\"note\">Codes réservés : AMT4L0 pour la CPDP, AMT4Q0 pour la psychologue du travail en suivi individuel. Tous les champs sont obligatoires sauf « optionnel ». « Charger un document » permet de joindre un fichier.</p>"
     },
     {
       "id": "retrouver-demande",
@@ -756,62 +737,68 @@
         9,
         10
       ],
-      "essentiel": "<h4>Par la page « Demande d'intervention »</h4><ol><li>Cliquez sur l'icône AMT, puis sur « Demande d'intervention ».</li><li>Pour tout voir : « Supprimer les filtres », puis « Rechercher ».</li><li>Pour filtrer : par intervenant (la personne à qui la demande est attribuée), adhérent, date ou statut. Plusieurs statuts peuvent être sélectionnés.</li><li>Cliquez sur un en-tête de colonne pour trier la liste.</li><li>Cliquez sur l'œil pour ouvrir la demande. Avec Ctrl + clic, elle s'ouvre dans un nouvel onglet.</li></ol><p class=\"alerte\">Par défaut, la case « Masquer les demandes d'intervention validées » est cochée : les demandes acceptées ne s'affichent pas.</p><h4>Par les activités à compléter</h4><ol><li>Cliquez sur la goutte, en haut à gauche. Vous y trouvez les demandes qui vous sont adressées et celles lancées depuis le portail adhérent par un adhérent de votre effectif.</li><li>Dans « À réaliser », cliquez sur « Demande d'intervention » pour voir toutes celles qui vous sont attribuées.</li><li>Cliquez sur une demande pour afficher son détail. Avec Ctrl + clic, elle s'ouvre dans un nouvel onglet.</li></ol>",
-      "icone": "🔎"
+      "icone": "🔎",
+      "essentiel": "<ol><li>Icône AMT, puis « Demande d'intervention ».</li><li>Pour tout afficher : « Supprimer les filtres », puis « Rechercher ».</li><li>Filtrez si besoin par intervenant (à qui la demande est attribuée), adhérent, date ou statut.</li><li>Cliquez sur l'œil pour ouvrir la demande (Ctrl + clic : nouvel onglet).</li></ol><p class=\"alerte\">La case « Masquer les demandes d'intervention validées » est cochée par défaut : les demandes acceptées n'apparaissent pas.</p><p><strong>Raccourci</strong> : cliquez sur la goutte en haut à gauche, puis dans « À réaliser » sur « Demande d'intervention ». Vous y voyez les demandes qui vous sont attribuées, y compris celles venues du portail adhérent.</p>"
     },
     {
-      "id": "creer-dossier",
-      "titre": "Créer un dossier AMT",
+      "id": "accepter-demande",
+      "titre": "Accepter une demande et créer le dossier AMT",
       "pages": [
-        11,
+        11
+      ],
+      "icone": "✅",
+      "essentiel": "<ol><li>Ouvrez la demande avec l'œil (voir l'étape précédente).</li><li>Si elle vous est adressée, cliquez sur « Accepter la demande ».</li><li>Le dossier AMT est créé et s'ouvre automatiquement, avec la plupart des champs déjà remplis.</li></ol><p class=\"note\">Un dossier AMT est toujours lié à un adhérent.</p>"
+    },
+    {
+      "id": "retrouver-dossier",
+      "titre": "Retrouver ou créer un dossier AMT sans demande",
+      "pages": [
         12
       ],
-      "essentiel": "<h4>À partir d'une demande d'intervention</h4><ol><li>Ouvrez la demande depuis la page « Demande d'intervention », avec l'œil.</li><li>Si la demande vous est adressée, le bouton « Accepter la demande » est actif. Cliquez dessus.</li><li>Le dossier AMT est créé et s'ouvre automatiquement.</li></ol><p class=\"note\">Les types d'intervention proposés dépendent de l'action définie dans la demande. Un dossier AMT est toujours lié à un adhérent.</p><h4>À partir de la page de recherche des dossiers AMT</h4><ol><li>Cliquez sur le menu ⋮, puis sur « Ajouter ».</li><li>Pour voir tous les dossiers : « Supprimer les filtres », puis « Rechercher ».</li><li>Pour filtrer : par intervenant (la personne en charge du dossier), adhérent, date ou statut.</li><li>Cliquez sur l'œil pour ouvrir un dossier. Avec Ctrl + clic, il s'ouvre dans un nouvel onglet.</li></ol><p class=\"alerte\">Par défaut, la case « Actif » est cochée : les dossiers AMT finalisés ne s'affichent pas.</p>",
-      "icone": "📁"
+      "icone": "📁",
+      "essentiel": "<ol><li>Ouvrez la page de recherche des dossiers AMT.</li><li>Pour créer un dossier : menu ⋮, puis « Ajouter ».</li><li>Pour tout afficher : « Supprimer les filtres », puis « Rechercher ». Filtrez si besoin par intervenant, adhérent, date ou statut.</li><li>Cliquez sur l'œil pour ouvrir un dossier (Ctrl + clic : nouvel onglet).</li></ol><p class=\"alerte\">La case « Actif » est cochée par défaut : les dossiers finalisés n'apparaissent pas.</p>"
     },
     {
-      "id": "dossier-amt",
-      "titre": "Le dossier AMT, onglet par onglet",
+      "id": "completer-general",
+      "titre": "Compléter et clôturer le dossier AMT (onglet Général)",
       "pages": [
         13,
-        14,
+        14
+      ],
+      "icone": "🗂️",
+      "essentiel": "<ol><li><strong>Intervenant</strong> : la personne responsable de l'action. Ajoutez-en d'autres dans « Intervenants ».</li><li><strong>Objectifs</strong> : le détail de l'action, selon le thésaurus de Présanse. <strong>Contact</strong> : la personne contact de l'adhérent.</li><li><strong>Informations complémentaires</strong> : tracez le suivi de l'intervention au fil de l'eau.</li><li><strong>Moyens</strong> : proposés selon l'objectif, à retirer ou compléter. Ce sont eux que vous retrouverez à l'enregistrement du temps.</li><li><strong>Conclusion</strong> : les informations importantes de l'intervention.</li><li><strong>Statut</strong> : faites-le évoluer pendant tout le suivi.</li></ol><p class=\"alerte\">« Annulé par l'ASMT », « Clôturé », « Annulé ou refus par l'adhérent » et « Traité/Suivi en cours » clôturent le dossier.</p><p class=\"note\">Non utilisés à l'ASMT : onglets « Questionnaire » et « Analyse des risques », champs « Guide », « Processus de travail », « Produits utilisés ».</p>"
+    },
+    {
+      "id": "planifier-rdv",
+      "titre": "Planifier, modifier ou supprimer le rendez-vous",
+      "pages": [
         15,
         16,
         17,
-        18,
-        19,
         20
       ],
-      "essentiel": "<p>Onglets utilisés : Général, Planning AMT, Enregistrement de temps, Postes de travail, Salariés, Contacts, Adhérent, Demande, Documents. Les onglets « Questionnaire » et « Analyse des risques » ne sont pas utilisés à l'ASMT.</p><h4>Général</h4><ul><li>La date de création et l'adhérent sont remplis automatiquement.</li><li><strong>Intervenant</strong> : la personne responsable de la réalisation de l'action.</li><li><strong>Objectifs</strong> : le détail de l'action, selon le thésaurus de Présanse.</li><li><strong>Statut</strong> : faites-le évoluer tout au long du suivi. Les statuts « Annulé par l'ASMT », « Clôturé », « Annulé ou refus par l'adhérent » et « Traité/Suivi en cours » clôturent le dossier.</li><li><strong>Informations complémentaires</strong> : pour tracer le suivi de l'intervention.</li><li><strong>Intervenants</strong> : pour ajouter un ou plusieurs intervenants supplémentaires.</li><li><strong>Conclusion</strong> : les informations importantes liées à l'intervention.</li><li><strong>Moyens</strong> : proposés automatiquement selon l'objectif. Vous pouvez en retirer ou en ajouter. Ce sont eux qui seront proposés lors des enregistrements de temps.</li><li>Non utilisés à l'ASMT : Guide, Processus de travail, Produits utilisés.</li></ul><p class=\"note\">Si le dossier vient d'une demande d'intervention, la plupart de ces champs sont déjà remplis.</p><h4>Planning AMT : planifier le rendez-vous</h4><ol><li>La tâche à planifier se trouve dans la partie droite. Glissez-la vers le jour voulu de votre agenda.</li><li>Une entité de planning s'ouvre, déjà remplie. Ajustez les horaires, déplacement compris, et le lieu.</li><li>Pour réserver du matériel ou un véhicule de service, cliquez dans « Équipement » et tapez les trois premières lettres.</li><li>Cliquez sur « Sauvegarder ».</li></ol><p class=\"alerte\">Un véhicule ou un matériel affiché en rouge n'est pas disponible.</p><ul><li><strong>Modifier</strong> : sélectionnez le rendez-vous, puis menu ⋮ et « Modifier l'entité de planning ».</li><li><strong>Supprimer</strong> : double-cliquez sur le rendez-vous, puis menu ⋮ et « Supprimer ». Confirmez, puis choisissez le motif d'annulation.</li></ul><h4>Enregistrement de temps, Postes de travail, Demande</h4><ul><li><strong>Enregistrement de temps</strong> : aperçu des prestations déjà enregistrées pour ce dossier.</li><li><strong>Postes de travail</strong> : mêmes informations que dans le dossier adhérent.</li><li><strong>Demande</strong> : reprise des éléments de la demande initiale.</li></ul><h4>Documents</h4><p>Seuls les documents du dossier AMT s'affichent ici.</p><ul><li><strong>Créer à partir d'un modèle</strong> : menu ⋮, « Créer », puis choisissez un modèle de la classe « Documents AMT ».</li><li><strong>Joindre un fichier de votre ordinateur</strong> : menu ⋮, « Télécharger un nouveau document ». Glissez le fichier (moins de 7 Mo), renseignez la classe de document, puis cliquez sur « Commencer le téléchargement ».</li></ul><p class=\"alerte\">La fenêtre de téléchargement reste ouverte tant que vous ne cliquez pas sur « Fermer ».</p>",
-      "icone": "🗂️"
+      "icone": "📅",
+      "essentiel": "<ol><li>Dans le dossier AMT, ouvrez l'onglet « Planning AMT ». Votre agenda s'affiche.</li><li>Glissez la tâche de la partie droite vers le jour voulu.</li><li>Ajustez les horaires (déplacement compris) et le lieu.</li><li>Besoin de matériel ou d'un véhicule de service ? Cliquez dans « Équipement » et tapez les trois premières lettres.</li><li>Cliquez sur « Sauvegarder ».</li></ol><p class=\"alerte\">Un matériel ou un véhicule affiché en rouge n'est pas disponible.</p><ul><li><strong>Modifier</strong> : sélectionnez le rendez-vous, menu ⋮, « Modifier l'entité de planning ».</li><li><strong>Supprimer</strong> : double-cliquez sur le rendez-vous, menu ⋮, « Supprimer », confirmez, puis choisissez le motif.</li><li><strong>Voir tous vos rendez-vous</strong> : icône Agenda du menu principal.</li></ul>"
     },
     {
-      "id": "consulter-planning",
-      "titre": "Consulter votre planning",
+      "id": "documents-dossier",
+      "titre": "Ajouter un document au dossier AMT",
       "pages": [
-        20
+        18,
+        19
       ],
-      "essentiel": "<ol><li>Cliquez sur l'icône Agenda du menu principal.</li><li>L'agenda affiche toutes vos activités planifiées, c'est-à-dire celles où vous êtes participant.</li></ol><p>Pour chaque plage, vous voyez directement : l'heure de début et de fin, le type d'activité, le lieu et son adresse, le sujet et l'information interne.</p>",
-      "icone": "📅"
+      "icone": "📎",
+      "essentiel": "<p>Dans le dossier AMT, onglet « Documents », menu ⋮ :</p><ul><li><strong>« Créer »</strong> : choisissez un modèle de la classe « Documents AMT ».</li><li><strong>« Télécharger un nouveau document »</strong> : glissez le fichier (moins de 7 Mo), renseignez la classe de document, puis « Commencer le téléchargement ».</li></ul><p class=\"alerte\">La fenêtre reste ouverte tant que vous ne cliquez pas sur « Fermer ».</p>"
     },
     {
       "id": "enregistrer-temps",
-      "titre": "Enregistrer le temps de travail",
+      "titre": "Enregistrer et suivre le temps passé",
       "pages": [
         21,
         22
       ],
-      "essentiel": "<ol><li>Ouvrez le menu AMT (l'icône « cœur sur la main »), puis « Enregistrement d'activité ».</li><li>La page montre votre agenda dans les colonnes « Planning » et vos enregistrements déjà créés dans les colonnes « Enregistrement ».</li><li>Glissez l'entité de la colonne « Planning » vers la colonne « Enregistrement ».</li><li>Le formulaire s'ouvre à droite, déjà rempli. Corrigez si besoin la date et les heures de début et de fin.</li><li>Renseignez le statut, la sous-activité et le moyen, puis cliquez sur « Sauvegarder ».</li></ol><p class=\"alerte\">Pour une Fiche d'Entreprise, saisissez : statut « Traité/Suivi en cours », sous-activité « Réalisation », moyen MAMT41 ou MAMT42. Ce sont ces trois valeurs qui font avancer la date de la prochaine FE.</p>",
-      "icone": "⏱️"
-    },
-    {
-      "id": "suivre-temps",
-      "titre": "Suivre vos enregistrements de temps",
-      "pages": [
-        22
-      ],
-      "essentiel": "<p>La page « Aperçu des prestations » liste les enregistrements de temps réalisés.</p><p>Vous pouvez chercher par : adhérent, période (date de début et de fin), intervenant, action, activité et cible.</p>",
-      "icone": "📊"
+      "icone": "⏱️",
+      "essentiel": "<ol><li>Icône AMT (cœur sur la main), puis « Enregistrement d'activité ».</li><li>Glissez le rendez-vous de la colonne « Planning » vers la colonne « Enregistrement ».</li><li>Dans le formulaire à droite, déjà rempli, corrigez si besoin la date et les heures.</li><li>Renseignez le statut, la sous-activité et le moyen, puis « Sauvegarder ».</li></ol><p class=\"alerte\">Fiche d'Entreprise : statut « Traité/Suivi en cours », sous-activité « Réalisation », moyen MAMT41 ou MAMT42. Sans ces trois valeurs, la date de la prochaine FE n'avance pas.</p><p><strong>Retrouver vos enregistrements</strong> : page « Aperçu des prestations », recherche par adhérent, période, intervenant, action, activité ou cible.</p>"
     }
   ],
   "icone": "🤝",
