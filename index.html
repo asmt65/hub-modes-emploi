@@ -292,8 +292,8 @@ const SYNONYMES=[
   ["vehicule","voiture"],
   ["telecharger","joindre","charger"]
 ].map(g=>g.map(plat));
-const VOCAB=new Set();
-DOCS.forEach(d=>d.chapitres.forEach(c=>{c._p=plat(c.recherche);c._t=plat(c.titre);c._m=new Set(c._p.split(/[^a-z0-9]+/).filter(w=>w.length>2));c._m.forEach(w=>VOCAB.add(w))}));
+const VOCAB=new Set(),COURTS=new Set();
+DOCS.forEach(d=>d.chapitres.forEach(c=>{c._p=plat(c.recherche);c._t=plat(c.titre);c._m=new Set(c._p.split(/[^a-z0-9]+/).filter(w=>w.length>2));c._m.forEach(w=>VOCAB.add(w));c._p.split(/[^a-z0-9]+/).forEach(w=>{if(w.length===2||w.length===3)COURTS.add(w)})}));
 function distance(a,b,max){
   if(Math.abs(a.length-b.length)>max)return max+1;
   let pp=null,p=Array.from({length:b.length+1},(_,j)=>j);
@@ -329,7 +329,8 @@ function evaluer(c,mots){
     const f=formes(m);let s=0;
     for(const x of f.exactes){
       const entier=new RegExp("(^|[^a-z0-9])"+x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"($|[^a-z0-9])").test(c._p);
-      const debut=entier||(x.length<=3?new RegExp("(^|[^a-z0-9])"+x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).test(c._p):c._p.includes(x));
+      const sigle=x.length<=3&&(COURTS.has(x)||SYNONYMES.some(g=>g.includes(x)));
+      const debut=entier||(sigle?false:x.length<=3?new RegExp("(^|[^a-z0-9])"+x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).test(c._p):c._p.includes(x));
       if(debut){vus.push(x);s=Math.max(s,(x===m?10:7)+(entier?5:0)+(c._t.includes(x)?8:0))}
     }
     if(!s){for(const w of f.proches){if(c._m.has(w)){vus.push(w);s=Math.max(s,3+(c._t.includes(w)?4:0))}}if(s)approx=true}
